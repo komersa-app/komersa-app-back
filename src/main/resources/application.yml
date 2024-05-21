@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: komersa
+
+  datasource:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+swagger:
+  documentation:
+    uri: uri
