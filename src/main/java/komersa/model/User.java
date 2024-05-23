@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity(name = "'user'")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="USER_TYPE")
+@Table(name="USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
