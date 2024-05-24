@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDtoResponse {
 
-    private long usrId;
+    private Long id;
 
-    private String usrFname;
+    private String name;
 
-    private String usrEmail;
+    private String email;
 
-    private String usrPswd;
+    private String password;
 }

@@ -2,12 +2,11 @@ package komersa.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "car")
@@ -15,13 +14,21 @@ import java.util.UUID;
 public class Car{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID carId;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "descritption")
     private String description;
+    @Column(name = "color")
     private String color;
+    @Column(name = "motor_type")
     private String motorType;
+    @Column(name = "power")
     private String power;
+    @Column(name = "status")
     private String status;
+    @Column(name = "type")
     private String type;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)

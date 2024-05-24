@@ -1,12 +1,9 @@
 package komersa.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "images")
@@ -14,7 +11,9 @@ import java.util.UUID;
 public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID imageId;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "url")
     private String url;
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)

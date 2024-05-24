@@ -1,13 +1,10 @@
 package komersa.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "price")
@@ -15,8 +12,10 @@ import java.util.UUID;
 public class price {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
-    private LocalDateTime changeDateTime;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "change_datetime")
+    private LocalDateTime changeDatetime;
     @OneToOne
     @JoinColumn(name = "car_id", referencedColumnName = "carId")
     private Car car;

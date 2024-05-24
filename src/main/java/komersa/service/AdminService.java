@@ -23,7 +23,7 @@ public class AdminService {
         return adminRepository.save(admin);
     }
 
-    public Admin getById(long id) {
+    public Admin getById(Long id) {
         log.info("Admin get by id: {}", id);
         return adminRepository.findById(id).orElseThrow(()->new EntityNotFoundException("Admin with id: " + id + " does not exist"));
     }
@@ -33,15 +33,15 @@ public class AdminService {
         return adminRepository.findAll(pageable);
     }
 
-    public Admin updateById(long id, Admin admin) {
+    public Admin updateById(Long id, Admin admin) {
         getById(id);
-        admin.setAdmId(id);
+        admin.setId(id);
 
         log.info("Admin update by id: {}", admin);
         return adminRepository.save(admin);
     }
 
-    public Boolean deleteById(long id) {
+    public Boolean deleteById(Long id) {
         log.info("Admin delete by id: {}", id);
         adminRepository.deleteById(id);
         return true;

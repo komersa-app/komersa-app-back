@@ -9,10 +9,9 @@ public class UserDtoMapper {
     public static User toModel(UserDtoRequest request) {
         User model = new User();
 
-        model.setUsrId(request.getUsrId());
-        model.setUsrFname(request.getUsrFname());
-        model.setUsrEmail(request.getUsrEmail());
-        model.setUsrPswd(request.getUsrPswd());
+        model.setName(request.getName());
+        model.setEmail(request.getEmail());
+        model.setPassword(request.getPassword());
 
         return model;
     }
@@ -20,10 +19,10 @@ public class UserDtoMapper {
     public static UserDtoResponse toResponse(User model) {
         UserDtoResponse response = new UserDtoResponse();
 
-        response.setUsrId(model.getUsrId());
-        response.setUsrFname(model.getUsrFname());
-        response.setUsrEmail(model.getUsrEmail());
-        response.setUsrPswd(model.getUsrPswd());
+        response.setId(model.getId());
+        response.setName(model.getName());
+        response.setEmail(model.getEmail());
+        response.setPassword(model.getPassword());
 
         return response;
     }

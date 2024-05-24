@@ -13,11 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AdminDtoRequest {
 
-    @NotNull(message = "Adm Id cannot be null")
-    @NotBlank(message = "Adm Id cannot be blank")
-    private long admId;
-
-    @NotNull(message = "Adm Pswd cannot be null")
-    @NotBlank(message = "Adm Pswd cannot be blank")
-    private String admPswd;
+    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Password cannot be blank")
+    private String password;
 }

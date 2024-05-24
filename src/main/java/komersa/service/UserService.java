@@ -23,7 +23,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User getById(long id) {
+    public User getById(Long id) {
         log.info("User get by id: {}", id);
         return userRepository.findById(id).orElseThrow(()->new EntityNotFoundException("User with id: " + id + " does not exist"));
     }
@@ -33,15 +33,15 @@ public class UserService {
         return userRepository.findAll(pageable);
     }
 
-    public User updateById(long id, User user) {
+    public User updateById(Long id, User user) {
         getById(id);
-        user.setUsrId(id);
+        user.setId(id);
 
         log.info("User update by id: {}", user);
         return userRepository.save(user);
     }
 
-    public Boolean deleteById(long id) {
+    public Boolean deleteById(Long id) {
         log.info("User delete by id: {}", id);
         userRepository.deleteById(id);
         return true;

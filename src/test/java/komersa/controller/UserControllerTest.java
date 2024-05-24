@@ -60,10 +60,10 @@ class UserControllerTest {
                         .content(objectMapper.writeValueAsString(userRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.usrId").value(userResponse.getUsrId()))
-                .andExpect(jsonPath("$.usrFname").value(userResponse.getUsrFname()))
-                .andExpect(jsonPath("$.usrEmail").value(userResponse.getUsrEmail()))
-                .andExpect(jsonPath("$.usrPswd").value(userResponse.getUsrPswd()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.email").value(userResponse.getEmail()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
     }
 
     @Test
@@ -106,10 +106,10 @@ class UserControllerTest {
         mockMvc.perform(get("/api/user/{id}", StaticUser.ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.usrId").value(userResponse.getUsrId()))
-                .andExpect(jsonPath("$.usrFname").value(userResponse.getUsrFname()))
-                .andExpect(jsonPath("$.usrEmail").value(userResponse.getUsrEmail()))
-                .andExpect(jsonPath("$.usrPswd").value(userResponse.getUsrPswd()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.email").value(userResponse.getEmail()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
     }
 
     @Test
@@ -166,10 +166,10 @@ class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.usrId").value(userResponse.getUsrId()))
-                .andExpect(jsonPath("$.usrFname").value(userResponse.getUsrFname()))
-                .andExpect(jsonPath("$.usrEmail").value(userResponse.getUsrEmail()))
-                .andExpect(jsonPath("$.usrPswd").value(userResponse.getUsrPswd()));
+                .andExpect(jsonPath("$.id").value(userResponse.getId()))
+                .andExpect(jsonPath("$.name").value(userResponse.getName()))
+                .andExpect(jsonPath("$.email").value(userResponse.getEmail()))
+                .andExpect(jsonPath("$.password").value(userResponse.getPassword()));
     }
 
     @Test

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class AdminDtoResponse {
 
-    private long admId;
+    private Long id;
 
-    private String admPswd;
+    private String password;
 }

@@ -38,7 +38,7 @@ public class AdminController {
     @Operation(summary = "Get Admin", description = "Get Admin By Id")
     @ApiResponse(responseCode = "200", description = "Admin Get successfully")
     @ApiResponse(responseCode = "404", description = "Admin with such an Id not found")
-    public ResponseEntity<AdminDtoResponse> getAdminById(@PathVariable("id") long id) {
+    public ResponseEntity<AdminDtoResponse> getAdminById(@PathVariable("id") Long id) {
         Admin admin = adminService.getById(id);
         return new ResponseEntity<>(AdminDtoMapper.toResponse(admin), HttpStatus.OK);
     }
@@ -57,7 +57,7 @@ public class AdminController {
     @ApiResponse(responseCode = "201", description = "Admin updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Admin with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<AdminDtoResponse> updateAdmin(@PathVariable("id") long id, @Valid @RequestBody AdminDtoRequest adminDtoRequest) {
+    public ResponseEntity<AdminDtoResponse> updateAdmin(@PathVariable("id") Long id, @Valid @RequestBody AdminDtoRequest adminDtoRequest) {
         Admin admin = AdminDtoMapper.toModel(adminDtoRequest);
         admin = adminService.updateById(id, admin);
         return new ResponseEntity<>(AdminDtoMapper.toResponse(admin), HttpStatus.CREATED);
@@ -66,7 +66,7 @@ public class AdminController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an admin", description = "Delete an admin by id")
     @ApiResponse(responseCode = "204", description = "Admin deleted successfully")
-    public ResponseEntity<Boolean> deleteAdmin(@PathVariable("id") long id) {
+    public ResponseEntity<Boolean> deleteAdmin(@PathVariable("id") Long id) {
         return new ResponseEntity<>(adminService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }

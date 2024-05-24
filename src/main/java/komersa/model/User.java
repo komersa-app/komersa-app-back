@@ -15,12 +15,12 @@ import lombok.NoArgsConstructor;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "usr_id")
-    private long usrId;
-    @Column(name = "usr_fname")
-    private String usrFname;
-    @Column(name = "usr_email")
-    private String usrEmail;
-    @Column(name = "usr_pswd")
-    private String usrPswd;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
 }

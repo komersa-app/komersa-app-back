@@ -1,12 +1,9 @@
 package komersa.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "details")
@@ -14,8 +11,11 @@ import java.util.UUID;
 public class Details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID detailsId;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "brand")
     private String brand;
+    @Column(name = "model")
     private String model;
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)

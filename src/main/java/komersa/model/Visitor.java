@@ -2,11 +2,10 @@ package komersa.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "visitor")
@@ -14,10 +13,15 @@ import java.util.UUID;
 public class Visitor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
-    private String visFirstName;
-    private String visEmail;
-    private String visTel;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "firstname")
+    private String firstname;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "tel")
+    private String tel;
+    @Column(name = "message")
     private String message;
 
     @ManyToOne

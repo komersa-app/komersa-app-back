@@ -4,13 +4,12 @@ package komersa.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "appointement")
@@ -18,9 +17,13 @@ import java.util.UUID;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID aptId;
-    private String aptName;
-    private LocalDateTime aptDateTime;
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "datetime")
+    private LocalDateTime datetime;
+    @Column(name = "status")
     private Status status;
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)
