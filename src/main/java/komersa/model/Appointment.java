@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "appointement")
+@Table(name = "appointment")
 @Entity
 public class Appointment {
     @Id
@@ -29,11 +29,13 @@ public class Appointment {
     @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Visitor> visitors;
+    //@OneToMany(mappedBy = "appointment_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private List<Visitor> visitors;
 
-    @OneToMany(mappedBy = "appointment", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<User> users;
+    //@OneToMany(mappedBy = "appointment_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     public enum Status {
         PENDING,
         VALIDATED,

@@ -17,6 +17,6 @@ public class price {
     @Column(name = "change_datetime")
     private LocalDateTime changeDatetime;
     @OneToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "carId")
+    @JoinColumn(name = "car_id", referencedColumnName = "id")
     private Car car;
 }

@@ -11,8 +11,6 @@ import lombok.EqualsAndHashCode;
 public class Admin extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
     @Column(name = "password")
     private String password;
 }
