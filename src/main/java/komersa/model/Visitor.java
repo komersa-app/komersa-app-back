@@ -1,24 +1,24 @@
 package komersa.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@Entity
-@DiscriminatorValue("ADMIN")
+@AllArgsConstructor
+@NoArgsConstructor
+@DiscriminatorValue("VISITOR")
 @Data
-public class Admin extends User {
+@Entity
+public class Visitor extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "message")
+    private String message;
 
-    @OneToMany(mappedBy = "ADMIN")
+    @OneToMany(mappedBy = "VISITOR")
     private List<Appointment> appointments;
 }

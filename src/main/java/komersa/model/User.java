@@ -13,7 +13,6 @@ import java.util.List;
 @Entity(name = "USERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="USER_TYPE")
-@Table(name="USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -23,7 +22,4 @@ public class User {
     private String name;
     @Column(name = "email")
     private String email;
-
-    @OneToMany(mappedBy = "USERS")
-    List<Appointment> appointments;
 }
