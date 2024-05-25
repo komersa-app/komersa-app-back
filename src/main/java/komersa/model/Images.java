@@ -15,7 +15,7 @@ public class Images {
     private Long id;
     @Column(name = "url")
     private String url;
+
     @ManyToOne
-    @JoinColumn(name = "car_id", nullable = false)
     private Car car;
 }

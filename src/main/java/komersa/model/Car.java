@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.awt.*;
 import java.util.List;
 @Data
 @AllArgsConstructor
@@ -31,12 +32,20 @@ public class Car{
     @Column(name = "type")
     private String type;
 
+    /*
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Details> detailsList;
 
     @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Images> imagesList;
+     */
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "images")
+    private List<Images> images;
+    @OneToMany(mappedBy = "car")
     private List<Appointment> appointments;
+    @ManyToOne
+    private Details details;
+    @OneToOne
+    private Price price;
 }

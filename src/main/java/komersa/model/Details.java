@@ -3,6 +3,8 @@ package komersa.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +19,7 @@ public class Details {
     private String brand;
     @Column(name = "model")
     private String model;
-    @ManyToOne
-    @JoinColumn(name = "car_id", nullable = false)
-    private Car car;
 
+    @OneToMany(mappedBy = "details")
+    private List<Car> cars;
 }

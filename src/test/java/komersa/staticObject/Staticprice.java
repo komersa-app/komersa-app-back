@@ -1,12 +1,12 @@
 package komersa.staticObject;
 
-import komersa.dto.request.priceDtoRequest;
-import komersa.dto.response.priceDtoResponse;
+import komersa.dto.request.PriceDtoRequest;
+import komersa.dto.response.PriceDtoResponse;
 import komersa.model.price;
 
 import java.time.LocalDateTime;
 
-public class Staticprice {
+public class StaticPrice {
 
     public static final Long ID = 1L;
 
@@ -26,22 +26,22 @@ public class Staticprice {
         return model;
     }
 
-    public static priceDtoRequest priceDtoRequest1() {
-        priceDtoRequest dtoRequest = new priceDtoRequest();
+    public static PriceDtoRequest priceDtoRequest1() {
+        PriceDtoRequest dtoRequest = new PriceDtoRequest();
         dtoRequest.setCarId(1L);
         return dtoRequest;
     }
 
-    public static priceDtoResponse priceDtoResponse1() {
-        priceDtoResponse dtoResponse = new priceDtoResponse();
+    public static PriceDtoResponse priceDtoResponse1() {
+        PriceDtoResponse dtoResponse = new PriceDtoResponse();
         dtoResponse.setId(ID);
         dtoResponse.setChangeDatetime(LocalDateTime.MIN);
         dtoResponse.setCar(StaticCar.carDtoResponse1());
         return dtoResponse;
     }
 
-    public static priceDtoResponse priceDtoResponse2() {
-        priceDtoResponse dtoResponse = new priceDtoResponse();
+    public static PriceDtoResponse priceDtoResponse2() {
+        PriceDtoResponse dtoResponse = new PriceDtoResponse();
         dtoResponse.setId(ID);
         dtoResponse.setChangeDatetime(LocalDateTime.MIN);
         dtoResponse.setCar(StaticCar.carDtoResponse1());

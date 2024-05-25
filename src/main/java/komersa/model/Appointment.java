@@ -24,23 +24,14 @@ public class Appointment {
     @Column(name = "datetime")
     private LocalDateTime datetime;
     @Column(name = "status")
-    private Status status;
+    private String status;
+
     @ManyToOne
-    @JoinColumn(name = "car_id", nullable = false)
     private Car car;
-
-    //@OneToMany(mappedBy = "appointment_id", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private List<Visitor> visitors;
-
-    //@OneToMany(mappedBy = "appointment_id", cascade = CascadeType.ALL, orphanRemoval = true)
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-    public enum Status {
-        PENDING,
-        VALIDATED,
-        REJECTED,
-        ARCHIVED
-    }
-
+    private User admin;
+    @ManyToOne
+    private User visitor;
+    @ManyToOne
+    private Appointment appointment;
 }

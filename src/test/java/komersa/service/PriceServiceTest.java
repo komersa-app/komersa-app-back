@@ -2,8 +2,8 @@ package komersa.service;
 
 
 import komersa.exception.EntityNotFoundException;
-import komersa.model.price;
-import komersa.repository.priceRepository;
+import komersa.model.Price;
+import komersa.repository.PriceRepository;
 import komersa.staticObject.Staticprice;
 import komersa.staticObject.StaticCar;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,16 +23,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class priceServiceTest {
+class PriceServiceTest {
 
     @Mock
-    private priceRepository priceRepository;
+    private PriceRepository priceRepository;
     @Mock
     private CarService carService;
     @InjectMocks
-    private priceService priceService;
-    private final price price = Staticprice.price1();
-    private final price price2 = Staticprice.price2();
+    private PriceService priceService;
+    private final Price price = Staticprice.price1();
+    private final Price price2 = Staticprice.price2();
 
     @BeforeEach
     void setUp() {
@@ -42,9 +42,9 @@ class priceServiceTest {
     @Test
     void testCreate() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-	    when(priceRepository.save(any(price.class))).thenReturn(price);
+        when(priceRepository.save(any(Price.class))).thenReturn(price);
 
-        price createdprice = priceService.create(price);
+        Price createdprice = priceService.create(price);
 
         assertNotNull(createdprice);
         assertEquals(price, createdprice);
@@ -79,14 +79,14 @@ class priceServiceTest {
 
     @Test
     void testGetAll() {
-        List<price> priceList = new ArrayList<>();
+        List<Price> priceList = new ArrayList<>();
         priceList.add(price);
         priceList.add(price2);
-        Page<price> pricePage = new PageImpl<>(priceList);
+        Page<Price> pricePage = new PageImpl<>(priceList);
         Pageable pageable = Pageable.unpaged();
         when(priceRepository.findAll(pageable)).thenReturn(pricePage);
 
-        Page<price> result = priceService.getAll(pageable);
+        Page<Price> result = priceService.getAll(pageable);
 
         assertEquals(priceList.size(), result.getSize());
         assertEquals(price, result.getContent().get(0));
@@ -107,13 +107,13 @@ class priceServiceTest {
 
     @Test
     void testUpdate_Success() {
-	    price existingprice = Staticprice.price1();
-        price updatedprice = Staticprice.price2();
+        Price existingprice = Staticprice.price1();
+        Price updatedprice = Staticprice.price2();
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-	    when(priceRepository.findById(Staticprice.ID)).thenReturn(java.util.Optional.of(existingprice));
+        when(priceRepository.findById(Staticprice.ID)).thenReturn(java.util.Optional.of(existingprice));
         when(priceRepository.save(updatedprice)).thenReturn(updatedprice);
 
-        price result = priceService.updateById(Staticprice.ID, updatedprice);
+        Price result = priceService.updateById(Staticprice.ID, updatedprice);
 
         assertEquals(updatedprice, result);
         verify(priceRepository, times(1)).findById(Staticprice.ID);
@@ -135,7 +135,7 @@ class priceServiceTest {
 
     @Test
     void testUpdateById_EntityNotFoundException() {
-        price updatedprice = Staticprice.price1();
+        Price updatedprice = Staticprice.price1();
         when(priceRepository.findById(Staticprice.ID)).thenReturn(java.util.Optional.empty());
 
         assertThrows(EntityNotFoundException.class, () -> priceService.updateById(Staticprice.ID, updatedprice));
@@ -145,11 +145,11 @@ class priceServiceTest {
 
     @Test
     void testUpdateById_AnyException() {
-        price existingprice = Staticprice.price1();
-        price updatedprice = Staticprice.price2();
+        Price existingprice = Staticprice.price1();
+        Price updatedprice = Staticprice.price2();
         when(priceRepository.findById(Staticprice.ID)).thenReturn(java.util.Optional.of(existingprice));
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-	    when(priceRepository.save(updatedprice)).thenThrow(new DataAccessException("Database connection failed") {
+        when(priceRepository.save(updatedprice)).thenThrow(new DataAccessException("Database connection failed") {
         });
 
         RuntimeException exception = assertThrows(RuntimeException.class, () -> priceService.updateById(Staticprice.ID, updatedprice));

@@ -5,10 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "'user'")
+@Entity(name = "USERS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="USER_TYPE")
 @Table(name="USERS")
@@ -21,6 +23,7 @@ public class User {
     private String name;
     @Column(name = "email")
     private String email;
-    @Column(name = "password")
-    private String password;
+
+    @OneToMany(mappedBy = "USERS")
+    List<Appointment> appointments;
 }
