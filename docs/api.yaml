@@ -1,0 +1,583 @@
+openapi: 3.0.3
+info:
+  version: "1.0.0"
+  title: "Resource API"
+  description: "API for managing resources such as user, visitor, appointment, car, detail, image, and price."
+servers:
+  - url: "http://localhost:8080/api"
+
+paths:
+  /users:
+    get:
+      summary: "Get all users"
+      operationId: "getAllUsers"
+      responses:
+        '200':
+          description: "A list of users"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+    put:
+      summary: "Save or update a user"
+      operationId: "saveOrUpdateUser"
+      requestBody:
+        description: "User to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: "User saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /users/{id}:
+    get:
+      summary: "Get a user by ID"
+      operationId: "getUserById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single user"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: "User not found"
+    delete:
+      summary: "Delete a user by ID"
+      operationId: "deleteUserById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "User deleted"
+        '404':
+          description: "User not found"
+
+  /visitors:
+    get:
+      summary: "Get all visitors"
+      operationId: "getAllVisitors"
+      responses:
+        '200':
+          description: "A list of visitors"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Visitor'
+    put:
+      summary: "Save or update a visitor"
+      operationId: "saveOrUpdateVisitor"
+      requestBody:
+        description: "Visitor to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Visitor'
+      responses:
+        '200':
+          description: "Visitor saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+
+  /visitors/{id}:
+    get:
+      summary: "Get a visitor by ID"
+      operationId: "getVisitorById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single visitor"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Visitor'
+        '404':
+          description: "Visitor not found"
+    delete:
+      summary: "Delete a visitor by ID"
+      operationId: "deleteVisitorById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Visitor deleted"
+        '404':
+          description: "Visitor not found"
+
+  /appointments:
+    get:
+      summary: "Get all appointments"
+      operationId: "getAllAppointments"
+      responses:
+        '200':
+          description: "A list of appointments"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Appointment'
+    put:
+      summary: "Save or update an appointment"
+      operationId: "saveOrUpdateAppointment"
+      requestBody:
+        description: "Appointment to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Appointment'
+      responses:
+        '200':
+          description: "Appointment saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+
+  /appointments/{id}:
+    get:
+      summary: "Get an appointment by ID"
+      operationId: "getAppointmentById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single appointment"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Appointment'
+        '404':
+          description: "Appointment not found"
+    delete:
+      summary: "Delete an appointment by ID"
+      operationId: "deleteAppointmentById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Appointment deleted"
+        '404':
+          description: "Appointment not found"
+
+  /cars:
+    get:
+      summary: "Get all cars"
+      operationId: "getAllCars"
+      responses:
+        '200':
+          description: "A list of cars"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Car'
+    put:
+      summary: "Save or update a car"
+      operationId: "saveOrUpdateCar"
+      requestBody:
+        description: "Car to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Car'
+      responses:
+        '200':
+          description: "Car saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+
+  /cars/{id}:
+    get:
+      summary: "Get a car by ID"
+      operationId: "getCarById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single car"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Car'
+        '404':
+          description: "Car not found"
+    delete:
+      summary: "Delete a car by ID"
+      operationId: "deleteCarById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Car deleted"
+        '404':
+          description: "Car not found"
+
+  /details:
+    get:
+      summary: "Get all details"
+      operationId: "getAllDetails"
+      responses:
+        '200':
+          description: "A list of details"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Detail'
+    put:
+      summary: "Save or update a detail"
+      operationId: "saveOrUpdateDetail"
+      requestBody:
+        description: "Detail to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Detail'
+      responses:
+        '200':
+          description: "Detail saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Detail'
+
+  /details/{id}:
+    get:
+      summary: "Get a detail by ID"
+      operationId: "getDetailById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single detail"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Detail'
+        '404':
+          description: "Detail not found"
+    delete:
+      summary: "Delete a detail by ID"
+      operationId: "deleteDetailById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Detail deleted"
+        '404':
+          description: "Detail not found"
+
+  /images:
+    get:
+      summary: "Get all images"
+      operationId: "getAllImages"
+      responses:
+        '200':
+          description: "A list of images"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+    put:
+      summary: "Save or update an image"
+      operationId: "saveOrUpdateImage"
+      requestBody:
+        description: "Image to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Image'
+      responses:
+        '200':
+          description: "Image saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+
+  /images/{id}:
+    get:
+      summary: "Get an image by ID"
+      operationId: "getImageById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single image"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        '404':
+          description: "Image not found"
+    delete:
+      summary: "Delete an image by ID"
+      operationId: "deleteImageById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Image deleted"
+        '404':
+          description: "Image not found"
+
+  /prices:
+    get:
+      summary: "Get all prices"
+      operationId: "getAllPrices"
+      responses:
+        '200':
+          description: "A list of prices"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Price'
+    put:
+      summary: "Save or update a price"
+      operationId: "saveOrUpdatePrice"
+      requestBody:
+        description: "Price to save or update"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Price'
+      responses:
+        '200':
+          description: "Price saved or updated"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+
+  /prices/{id}:
+    get:
+      summary: "Get a price by ID"
+      operationId: "getPriceById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '200':
+          description: "A single price"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+        '404':
+          description: "Price not found"
+    delete:
+      summary: "Delete a price by ID"
+      operationId: "deletePriceById"
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+      responses:
+        '204':
+          description: "Price deleted"
+        '404':
+          description: "Price not found"
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+
+    Visitor:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        visitDate:
+          type: string
+          format: date
+
+    Appointment:
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+          format: date-time
+        description:
+          type: string
+
+    Car:
+      type: object
+      properties:
+        id:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+
+    Detail:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+
+    Price:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: float
+
+  examples:
+    UserExample:
+      value:
+        id: "1"
+        name: "John Doe"
+        email: "johndoe@example.com"
+    VisitorExample:
+      value:
+        id: "1"
+        name: "Jane Smith"
+        visitDate: "2024-05-28"
+    AppointmentExample:
+      value:
+        id: "1"
+        date: "2024-06-15T10:00:00Z"
+        description: "Doctor's appointment"
+    CarExample:
+      value:
+        id: "1"
+        make: "Toyota"
+        model: "Corolla"
+        year: 2021
+    DetailExample:
+      value:
+        id: "1"
+        description: "Some detailed description"
+    ImageExample:
+      value:
+        id: "1"
+        url: "http://example.com/image.jpg"
+    PriceExample:
+      value:
+        id: "1"
+        amount: 19.99
