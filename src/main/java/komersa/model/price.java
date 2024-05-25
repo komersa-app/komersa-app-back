@@ -14,6 +14,8 @@ public class Price {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @Column(name = "amount")
+    private Double amount;
     @Column(name = "change_datetime")
     private LocalDateTime changeDatetime;
 
