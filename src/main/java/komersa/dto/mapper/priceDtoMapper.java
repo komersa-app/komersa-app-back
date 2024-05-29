@@ -10,6 +10,7 @@ public class priceDtoMapper {
     public static price toModel(priceDtoRequest request) {
         price model = new price();
 
+        model.setAmount(request.getAmount());
         Car car = new Car();
         car.setId(request.getCarId());
         model.setCar(car);
@@ -21,6 +22,7 @@ public class priceDtoMapper {
         priceDtoResponse response = new priceDtoResponse();
 
         response.setId(model.getId());
+        response.setAmount(model.getAmount());
         response.setChangeDatetime(model.getChangeDatetime());
         response.setCar(CarDtoMapper.toResponse(model.getCar()));
 

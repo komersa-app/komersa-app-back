@@ -13,6 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class priceDtoRequest {
 
+    @Positive(message = "Amount must be a positive number")
+    @NotNull(message = "Amount cannot be null")
+    private Double amount;
+
     @Positive(message = "Car must be a positive number")
     @NotNull(message = "Car cannot be null")
     private Long carId;

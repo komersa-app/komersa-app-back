@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class priceDtoResponse {
 
     private Long id;
+
+    private Double amount;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 
     private LocalDateTime changeDatetime;
