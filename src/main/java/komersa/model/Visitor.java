@@ -15,7 +15,7 @@ import java.util.List;
 public class Visitor extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     @Column(name = "message")
     private String message;
 
