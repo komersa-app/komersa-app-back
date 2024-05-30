@@ -32,14 +32,6 @@ public class Car{
     @Column(name = "type")
     private String type;
 
-    /*
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Details> detailsList;
-
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Images> imagesList;
-     */
-
     @OneToMany(mappedBy = "images")
     private List<Images> images;
     @OneToMany(mappedBy = "car")
@@ -47,5 +39,5 @@ public class Car{
     @ManyToOne
     private Details details;
     @OneToOne
-    private Price price;
+    private Prices price;
 }
