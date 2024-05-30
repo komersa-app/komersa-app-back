@@ -37,16 +37,17 @@ public class SecurityConfig {
 //        Set permissions on endpoints
         .authorizeHttpRequests(auth -> auth
 //            our public endpoints
-            .requestMatchers(HttpMethod.POST, "/api/auth/login/**").permitAll()
-            .requestMatchers(HttpMethod.GET, "/authentication-docs/**").permitAll()
+                .anyRequest().permitAll())
+            //.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
+            //.requestMatchers(HttpMethod.GET, "/authentication-docs/**").permitAll()
 //            our private endpoints
-            .anyRequest().authenticated())
+            //.anyRequest().authenticated())
             //.authenticationManager(authenticationManager)
 
 //        We need jwt filter before the UsernamePasswordAuthenticationFilter.
 //        Since we need every request to be authenticated before going through spring security filter.
 //        (UsernamePasswordAuthenticationFilter creates a UsernamePasswordAuthenticationToken from a username and password that are submitted in the HttpServletRequest.)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+            //.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
 

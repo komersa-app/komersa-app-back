@@ -14,16 +14,17 @@ import komersa.helper.JwtHelper;
 import komersa.service.AdminService;
 import komersa.service.LoginService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static komersa.utils.TokenExtractor.extractToken;
+
 @RestController
+@RequestMapping(value = "/api/auth")
 public class LoginController {
     //private final AuthenticationManager authenticationManager;
     private final LoginService loginService;
@@ -62,8 +63,8 @@ public class LoginController {
     @ApiResponse(responseCode = "500", content = @Content(schema = @Schema(implementation = ApiErrorResponse.class)))
     @GetMapping(value = "/loginAttempts")
     public ResponseEntity<List<LoginAttemptResponse>> loginAttempts(@RequestHeader("Authorization") String token) {
-        String email = JwtHelper.extractUsername(token.replace("Bearer ", ""));
-        List<LoginAttempt> loginAttempts = loginService.findRecentLoginAttempts(email);
+        String name = JwtHelper.extractUsername(extractToken(token));
+        List<LoginAttempt> loginAttempts = loginService.findRecentLoginAttempts(name);
         return ResponseEntity.ok(convertToDTOs(loginAttempts));
     }
 
