@@ -10,7 +10,9 @@ public class VisitorDtoMapper {
         Visitor model = new Visitor();
 
         model.setMessage(request.getMessage());
-
+        model.setEmail(request.getEmail());
+        model.setName(request.getName());
+        model.setMessage(request.getMessage());
         return model;
     }
 
@@ -19,7 +21,8 @@ public class VisitorDtoMapper {
 
         response.setId(model.getId());
         response.setMessage(model.getMessage());
-
+        response.setEmail(model.getEmail());
+        response.setName(model.getName());
         return response;
     }
 
