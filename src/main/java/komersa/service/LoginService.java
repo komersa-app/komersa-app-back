@@ -19,12 +19,12 @@ public class LoginService {
     }
 
     @Transactional
-    public void addLoginAttempt(String email, boolean success) {
-        LoginAttempt loginAttempt = new LoginAttempt(email, success, LocalDateTime.now());
-        repository.add(loginAttempt);
+    public void addLoginAttempt(String name, boolean success) {
+        LoginAttempt loginAttempt = new LoginAttempt(name, success, LocalDateTime.now());
+        repository.save(loginAttempt);
     }
 
-    public List<LoginAttempt> findRecentLoginAttempts(String email) {
-        return repository.findRecent(email);
+    public List<LoginAttempt> findRecentLoginAttempts(String name) {
+        return repository.findByName(name).stream().limit(10L).toList();
     }
 }

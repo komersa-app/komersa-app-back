@@ -9,6 +9,7 @@ import komersa.dto.response.ApiErrorResponse;
 import komersa.exception.AccessDeniedException;
 import komersa.helper.JwtHelper;
 import komersa.service.AdminService;
+import lombok.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +30,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
   }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+  protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response,@NonNull FilterChain filterChain)
       throws ServletException, IOException {
     try {
       String authHeader = request.getHeader("Authorization");
