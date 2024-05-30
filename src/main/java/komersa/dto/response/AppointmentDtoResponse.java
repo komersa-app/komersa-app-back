@@ -23,9 +23,9 @@ public class AppointmentDtoResponse {
 
     private CarDtoResponse car;
 
-    private UserDtoResponse admin;
+    private AdminDtoResponse admin;
 
-    private UserDtoResponse visitor;
+    private VisitorDtoResponse visitor;
 
     private AppointmentDtoResponse appointment;
 }

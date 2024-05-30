@@ -4,9 +4,7 @@ package komersa.service;
 import komersa.exception.EntityNotFoundException;
 import komersa.model.Appointment;
 import komersa.repository.AppointmentRepository;
-import komersa.staticObject.StaticAppointment;
-import komersa.staticObject.StaticCar;
-import komersa.staticObject.StaticUser;
+import komersa.staticObject.*;
 import komersa.staticObject.StaticUser;
 import komersa.staticObject.StaticAppointment;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,11 +31,10 @@ class AppointmentServiceTest {
     @Mock
     private CarService carService;
     @Mock
-    private UserService userService;
+    private AdminService adminService;
     @Mock
-    private UserService userService;
+    private VisitorService visitorService;
     @Mock
-    private AppointmentService appointmentService;
     @InjectMocks
     private AppointmentService appointmentService;
     private final Appointment appointment = StaticAppointment.appointment1();
@@ -51,8 +48,8 @@ class AppointmentServiceTest {
     @Test
     void testCreate() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenReturn(StaticAppointment.appointment1());
 	    when(appointmentRepository.save(any(Appointment.class))).thenReturn(appointment);
 
@@ -61,8 +58,8 @@ class AppointmentServiceTest {
         assertNotNull(createdAppointment);
         assertEquals(appointment, createdAppointment);
         verify(carService, times(1)).getById(StaticAppointment.ID);
-        verify(userService, times(1)).getById(StaticAppointment.ID);
-        verify(userService, times(1)).getById(StaticAppointment.ID);
+        verify(adminService, times(1)).getById(StaticAppointment.ID);
+        verify(visitorService, times(1)).getById(StaticAppointment.ID);
         verify(appointmentService, times(1)).getById(StaticAppointment.ID);
         verify(appointmentRepository, times(1)).save(appointment);
     }
@@ -80,40 +77,40 @@ class AppointmentServiceTest {
     }
 
     @Test
-    void testCreate_EntityNotFoundException_UserNotFound() {
+    void testCreate_EntityNotFoundException_AdminNotFound() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenThrow(new EntityNotFoundException("User not found"));
+        when(adminService.getById(StaticAdmin.ID)).thenThrow(new EntityNotFoundException("Admin not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.create(appointment));
 
         assertNotNull(exception);
-        assertEquals("User not found", exception.getMessage());
+        assertEquals("Admin not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticUser.ID);
         verifyNoInteractions(appointmentRepository);
     }
 
     @Test
-    void testCreate_EntityNotFoundException_UserNotFound() {
+    void testCreate_EntityNotFoundException_VisitorNotFound() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenThrow(new EntityNotFoundException("User not found"));
+        when(adminService.getById(StaticAdmin.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticVisitor.ID)).thenThrow(new EntityNotFoundException("Visitor not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.create(appointment));
 
         assertNotNull(exception);
-        assertEquals("User not found", exception.getMessage());
+        assertEquals("Visitor not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticAdmin.ID);
+        verify(visitorService, times(1)).getById(StaticVisitor.ID);
         verifyNoInteractions(appointmentRepository);
     }
 
     @Test
     void testCreate_EntityNotFoundException_AppointmentNotFound() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenThrow(new EntityNotFoundException("Appointment not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.create(appointment));
@@ -121,8 +118,8 @@ class AppointmentServiceTest {
         assertNotNull(exception);
         assertEquals("Appointment not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticUser.ID);
+        verify(visitorService, times(1)).getById(StaticUser.ID);
         verify(appointmentService, times(1)).getById(StaticAppointment.ID);
         verifyNoInteractions(appointmentRepository);
     }
@@ -130,8 +127,8 @@ class AppointmentServiceTest {
     @Test
     void testCreate_DataAccessException() {
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenReturn(StaticAppointment.appointment1());
         when(appointmentRepository.findById(StaticAppointment.ID)).thenThrow(new DataAccessException("Database connection failed") {
         });
@@ -176,8 +173,8 @@ class AppointmentServiceTest {
 	    Appointment existingAppointment = StaticAppointment.appointment1();
         Appointment updatedAppointment = StaticAppointment.appointment2();
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenReturn(StaticAppointment.appointment1());
 	    when(appointmentRepository.findById(StaticAppointment.ID)).thenReturn(java.util.Optional.of(existingAppointment));
         when(appointmentRepository.save(updatedAppointment)).thenReturn(updatedAppointment);
@@ -202,41 +199,41 @@ class AppointmentServiceTest {
     }
 
     @Test
-    void testUpdateById_EntityNotFoundException_UserNotFound() {
+    void testUpdateById_EntityNotFoundException_AdminNotFound() {
         when(appointmentRepository.findById(StaticAppointment.ID)).thenReturn(java.util.Optional.of(appointment));
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenThrow(new EntityNotFoundException("User not found"));
+        when(adminService.getById(StaticAdmin.ID)).thenThrow(new EntityNotFoundException("Admin not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.updateById(StaticAppointment.ID, appointment));
 
         assertNotNull(exception);
-        assertEquals("User not found", exception.getMessage());
+        assertEquals("Admin not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticUser.ID);
     }
 
     @Test
-    void testUpdateById_EntityNotFoundException_UserNotFound() {
+    void testUpdateById_EntityNotFoundException_VisitorNotFound() {
         when(appointmentRepository.findById(StaticAppointment.ID)).thenReturn(java.util.Optional.of(appointment));
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenThrow(new EntityNotFoundException("User not found"));
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenThrow(new EntityNotFoundException("Visitor not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.updateById(StaticAppointment.ID, appointment));
 
         assertNotNull(exception);
-        assertEquals("User not found", exception.getMessage());
+        assertEquals("Visitor not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticAdmin.ID);
+        verify(visitorService, times(1)).getById(StaticVisitor.ID);
     }
 
     @Test
     void testUpdateById_EntityNotFoundException_AppointmentNotFound() {
         when(appointmentRepository.findById(StaticAppointment.ID)).thenReturn(java.util.Optional.of(appointment));
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenThrow(new EntityNotFoundException("Appointment not found"));
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> appointmentService.updateById(StaticAppointment.ID, appointment));
@@ -244,8 +241,8 @@ class AppointmentServiceTest {
         assertNotNull(exception);
         assertEquals("Appointment not found", exception.getMessage());
         verify(carService, times(1)).getById(StaticCar.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
-        verify(userService, times(1)).getById(StaticUser.ID);
+        verify(adminService, times(1)).getById(StaticAdmin.ID);
+        verify(visitorService, times(1)).getById(StaticVisitor.ID);
         verify(appointmentService, times(1)).getById(StaticAppointment.ID);
     }
 
@@ -266,8 +263,8 @@ class AppointmentServiceTest {
         Appointment updatedAppointment = StaticAppointment.appointment2();
         when(appointmentRepository.findById(StaticAppointment.ID)).thenReturn(java.util.Optional.of(existingAppointment));
         when(carService.getById(StaticCar.ID)).thenReturn(StaticCar.car1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
-        when(userService.getById(StaticUser.ID)).thenReturn(StaticUser.user1());
+        when(adminService.getById(StaticUser.ID)).thenReturn(StaticAdmin.admin1());
+        when(visitorService.getById(StaticUser.ID)).thenReturn(StaticVisitor.visitor1());
         when(appointmentService.getById(StaticAppointment.ID)).thenReturn(StaticAppointment.appointment1());
 	    when(appointmentRepository.save(updatedAppointment)).thenThrow(new DataAccessException("Database connection failed") {
         });

@@ -1,9 +1,7 @@
 package komersa.dto.mapper;
 
-import komersa.model.Appointment;
+import komersa.model.*;
 import komersa.model.User;
-import komersa.model.User;
-import komersa.model.Car;
 import komersa.model.Appointment;
 import komersa.dto.request.AppointmentDtoRequest;
 import komersa.dto.response.AppointmentDtoResponse;
@@ -18,10 +16,10 @@ public class AppointmentDtoMapper {
         Car car = new Car();
         car.setId(request.getCarId());
         model.setCar(car);
-        User admin = new User();
+        Admin admin = new Admin();
         admin.setId(request.getAdminId());
         model.setAdmin(admin);
-        User visitor = new User();
+        Visitor visitor = new Visitor();
         visitor.setId(request.getVisitorId());
         model.setVisitor(visitor);
         Appointment appointment = new Appointment();
@@ -39,10 +37,8 @@ public class AppointmentDtoMapper {
         response.setDatetime(model.getDatetime());
         response.setStatus(model.getStatus());
         response.setCar(CarDtoMapper.toResponse(model.getCar()));
-        response.setAdmin
-visitor(UserDtoMapper.toResponse(model.getAdmin()));
-        response.setAdmin
-visitor(UserDtoMapper.toResponse(model.getVisitor()));
+        response.setAdmin(AdminDtoMapper.toResponse(model.getAdmin()));
+        response.setVisitor(VisitorDtoMapper.toResponse(model.getVisitor()));
         response.setAppointment(AppointmentDtoMapper.toResponse(model.getAppointment()));
 
         return response;

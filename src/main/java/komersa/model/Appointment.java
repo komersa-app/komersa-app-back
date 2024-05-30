@@ -29,9 +29,9 @@ public class Appointment {
     @ManyToOne
     private Car car;
     @ManyToOne
-    private User admin;
+    private Admin admin;
     @ManyToOne
-    private User visitor;
+    private Visitor visitor;
     @ManyToOne
     private Appointment appointment;
 }

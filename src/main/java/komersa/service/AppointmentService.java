@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final CarService carService;
-    private final UserService userService;
-    private final UserService userService;
+    private final AdminService adminService;
+    private final VisitorService visitorService;
     private final AppointmentService appointmentService;
 
-    public AppointmentService(AppointmentService appointmentService, UserService userService, UserService userService, CarService carService, AppointmentRepository appointmentRepository) {
+    public AppointmentService(AppointmentService appointmentService, AdminService adminService, VisitorService visitorService, CarService carService, AppointmentRepository appointmentRepository) {
         this.appointmentService = appointmentService;
-        this.userService = userService;
-        this.userService = userService;
+        this.visitorService = visitorService;
+        this.adminService = adminService;
         this.carService = carService;
         this.appointmentRepository = appointmentRepository;
     }
@@ -28,8 +28,8 @@ public class AppointmentService {
     public Appointment create(Appointment appointment) {
         log.info("Appointment create: {}", appointment);
         appointment.setCar(carService.getById(appointment.getCar().getId()));
-        appointment.setAdmin(userService.getById(appointment.getAdmin().getId()));
-        appointment.setVisitor(userService.getById(appointment.getVisitor().getId()));
+        appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
+        appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
         appointment.setAppointment(appointmentService.getById(appointment.getAppointment().getId()));
         return appointmentRepository.save(appointment);
     }
@@ -48,8 +48,8 @@ public class AppointmentService {
         getById(id);
         appointment.setId(id);
         appointment.setCar(carService.getById(appointment.getCar().getId()));
-        appointment.setAdmin(userService.getById(appointment.getAdmin().getId()));
-        appointment.setVisitor(userService.getById(appointment.getVisitor().getId()));
+        appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
+        appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
         appointment.setAppointment(appointmentService.getById(appointment.getAppointment().getId()));
         log.info("Appointment update by id: {}", appointment);
         return appointmentRepository.save(appointment);
