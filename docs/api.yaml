@@ -7,41 +7,42 @@ servers:
   - url: "http://localhost:8080/api"
 
 paths:
-  /users:
+  /admins:
     get:
-      summary: "Get all users"
-      operationId: "getAllUsers"
+      summary: "Get all admins"
+      operationId: "getAllAdmins"
       responses:
         '200':
-          description: "A list of users"
+          description: "A list of admins"
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/User'
+                  $ref: '#/components/schemas/Admin'
+
     put:
-      summary: "Save or update a user"
-      operationId: "saveOrUpdateUser"
+      summary: "Save or update an admin"
+      operationId: "saveOrUpdateAdmin"
       requestBody:
-        description: "User to save or update"
+        description: "Admin to save or update"
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/User'
+              $ref: '#/components/schemas/Admin'
       responses:
         '200':
-          description: "User saved or updated"
+          description: "Admin saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Admin'
 
-  /users/{id}:
+  /admins/{id}:
     get:
-      summary: "Get a user by ID"
-      operationId: "getUserById"
+      summary: "Get an admin by ID"
+      operationId: "getAdminById"
       parameters:
         - name: id
           in: path
@@ -51,16 +52,16 @@ paths:
             example: "1"
       responses:
         '200':
-          description: "A single user"
+          description: "A single admin"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: '#/components/schemas/Admin'
         '404':
-          description: "User not found"
+          description: "Admin not found"
     delete:
-      summary: "Delete a user by ID"
-      operationId: "deleteUserById"
+      summary: "Delete an admin by ID"
+      operationId: "deleteAdminById"
       parameters:
         - name: id
           in: path
@@ -70,9 +71,9 @@ paths:
             example: "1"
       responses:
         '204':
-          description: "User deleted"
+          description: "Admin deleted"
         '404':
-          description: "User not found"
+          description: "Admin not found"
 
   /visitors:
     get:
@@ -478,57 +479,94 @@ paths:
 
 components:
   schemas:
-    User:
+    Admin:
       type: object
       properties:
         id:
-          type: string
-        name:
+          type: integer
+        firstname:
           type: string
         email:
           type: string
+        tel:
+          type: string
+        password:
+          type: string
+      example:
+        $ref: '#/components/examples/AdminExample'
 
     Visitor:
       type: object
       properties:
         id:
+          type: integer
+        firstname:
           type: string
-        name:
+        email:
           type: string
-        visitDate:
+        tel:
           type: string
-          format: date
+        message:
+          type: string
+      example:
+        $ref: '#/components/examples/VisitorExample'
 
     Appointment:
       type: object
       properties:
         id:
+          type: integer
+        name:
           type: string
-        date:
+        datetime:
           type: string
           format: date-time
-        description:
+        status:
           type: string
+          enum:
+            - pending
+            - validated
+            - rejected
+            - archived
+      example:
+        $ref: '#/components/examples/AppointmentExample'
 
     Car:
       type: object
       properties:
         id:
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        year:
           type: integer
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        motor-type:
+          type: integer
+        power:
+          type: string
+        status:
+          type: string
+          enum:
+            - pinned
+            - not_pinned
+        type:
+          type: string
+      example:
+        $ref: '#/components/examples/CarExample'
 
     Detail:
       type: object
       properties:
         id:
           type: string
-        description:
+        brand:
           type: string
+        model:
+          type: string
+      example:
+        $ref: '#/components/examples/DetailExample'
 
     Image:
       type: object
@@ -537,6 +575,8 @@ components:
           type: string
         url:
           type: string
+      example:
+        $ref: '#/components/examples/ImageExample'
 
     Price:
       type: object
@@ -545,34 +585,45 @@ components:
           type: string
         amount:
           type: number
-          format: float
+          format: double
+        change-datetime:
+          type: string
+          format: date-time
+        example:
+          $ref: '#/components/examples/PriceExample'
 
   examples:
-    UserExample:
+    AdminExample:
       value:
         id: "1"
-        name: "John Doe"
+        firstname: "john"
         email: "johndoe@example.com"
+        password: "********"
     VisitorExample:
       value:
         id: "1"
-        name: "Jane Smith"
-        visitDate: "2024-05-28"
+        firstname: "Jane"
+        email: "janedoe@example.com"
     AppointmentExample:
       value:
         id: "1"
-        date: "2024-06-15T10:00:00Z"
-        description: "Doctor's appointment"
+        name: "first appointment"
+        datetime: "2024-06-15T10:00:00Z"
+        status: "pending"
     CarExample:
       value:
         id: "1"
-        make: "Toyota"
-        model: "Corolla"
-        year: 2021
+        name: "Tesla"
+        description: "Tesla Model S"
+        motor-type: "electric"
+        power: "250horsepower"
+        status: "pinned"
+        type: "Electric sedan"
     DetailExample:
       value:
         id: "1"
-        description: "Some detailed description"
+        brand: "Tesla"
+        model: "S"
     ImageExample:
       value:
         id: "1"
@@ -580,4 +631,5 @@ components:
     PriceExample:
       value:
         id: "1"
-        amount: 19.99
+        amount: "$39.990"
+        change-datetime: "2024-06-15T10:00:00Z"
