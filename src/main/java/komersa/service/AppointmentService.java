@@ -15,10 +15,8 @@ public class AppointmentService {
     private final CarService carService;
     private final AdminService adminService;
     private final VisitorService visitorService;
-    private final AppointmentService appointmentService;
 
-    public AppointmentService(AppointmentService appointmentService, AdminService adminService, VisitorService visitorService, CarService carService, AppointmentRepository appointmentRepository) {
-        this.appointmentService = appointmentService;
+    public AppointmentService(AdminService adminService, VisitorService visitorService, CarService carService, AppointmentRepository appointmentRepository) {
         this.visitorService = visitorService;
         this.adminService = adminService;
         this.carService = carService;
@@ -30,7 +28,7 @@ public class AppointmentService {
         appointment.setCar(carService.getById(appointment.getCar().getId()));
         appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
-        appointment.setAppointment(appointmentService.getById(appointment.getAppointment().getId()));
+        appointment.setAppointment(getById(appointment.getAppointment().getId()));
         return appointmentRepository.save(appointment);
     }
 
@@ -50,7 +48,7 @@ public class AppointmentService {
         appointment.setCar(carService.getById(appointment.getCar().getId()));
         appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
-        appointment.setAppointment(appointmentService.getById(appointment.getAppointment().getId()));
+        appointment.setAppointment(getById(appointment.getAppointment().getId()));
         log.info("Appointment update by id: {}", appointment);
         return appointmentRepository.save(appointment);
     }

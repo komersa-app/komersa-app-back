@@ -19,11 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class AdminService implements UserDetailsService {
     private final AdminRepository adminRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public AdminService(AdminRepository adminRepository, PasswordEncoder passwordEncoder) {
+    public AdminService(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public Admin create(Admin admin) {

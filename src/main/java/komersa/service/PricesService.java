@@ -4,6 +4,7 @@ import komersa.exception.EntityNotFoundException;
 import komersa.model.Prices;
 import komersa.repository.PricesRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class PricesService {
     private final PricesRepository pricesRepository;
     private final CarService carService;
 
-    public PricesService(CarService carService, PricesRepository pricesRepository) {
+    public PricesService(@Lazy CarService carService, PricesRepository pricesRepository) {
         this.carService = carService;
         this.pricesRepository = pricesRepository;
     }

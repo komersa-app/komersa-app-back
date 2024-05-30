@@ -32,7 +32,7 @@ public class Car{
     @Column(name = "type")
     private String type;
 
-    @OneToMany(mappedBy = "images")
+    @OneToMany(mappedBy = "car")
     private List<Images> images;
     @OneToMany(mappedBy = "car")
     private List<Appointment> appointments;

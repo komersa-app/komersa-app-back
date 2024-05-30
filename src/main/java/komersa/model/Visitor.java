@@ -19,6 +19,6 @@ public class Visitor extends User{
     @Column(name = "message")
     private String message;
 
-    @OneToMany(mappedBy = "VISITOR")
+    @OneToMany(mappedBy = "visitor")
     private List<Appointment> appointments;
 }

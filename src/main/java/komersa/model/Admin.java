@@ -19,6 +19,6 @@ public class Admin extends User {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "ADMIN")
+    @OneToMany(mappedBy = "admin")
     private List<Appointment> appointments;
 }
