@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class priceDtoRequest {
+public class PricesDtoRequest {
 
     @Positive(message = "Amount must be a positive number")
     @NotNull(message = "Amount cannot be null")

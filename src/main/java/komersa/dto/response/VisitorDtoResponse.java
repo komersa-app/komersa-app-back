@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class VisitorDtoResponse {
 
-    private int id;
+    private Long id;
 
     private String message;
 }

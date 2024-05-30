@@ -1,6 +1,6 @@
 package komersa.dto.mapper;
 
-import komersa.model.Price;
+import komersa.model.Prices;
 import komersa.model.Details;
 import komersa.model.Car;
 import komersa.dto.request.CarDtoRequest;
@@ -21,7 +21,7 @@ public class CarDtoMapper {
         Details details = new Details();
         details.setId(request.getDetailsId());
         model.setDetails(details);
-        Price price = new Price();
+        Prices price = new Prices();
         price.setId(request.getPriceId());
         model.setPrice(price);
 
@@ -37,14 +37,3 @@ public class CarDtoMapper {
         response.setColor(model.getColor());
         response.setMotorType(model.getMotorType());
         response.setPower(model.getPower());
-        response.setStatus(model.getStatus());
-        response.setType(model.getType());
-        response.setDetails(DetailsDtoMapper.toResponse(model.getDetails()));
-        response.setPrice(PriceDtoMapper.toResponse(model.getPrice()));
-
-        return response;
-    }
-
-    private CarDtoMapper() {}
-
-}

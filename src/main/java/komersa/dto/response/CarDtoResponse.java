@@ -28,5 +28,5 @@ public class CarDtoResponse {
 
     private DetailsDtoResponse details;
 
-    private PriceDtoResponse price;
+    private PricesDtoResponse price;
 }
