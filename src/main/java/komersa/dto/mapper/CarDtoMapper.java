@@ -37,3 +37,14 @@ public class CarDtoMapper {
         response.setColor(model.getColor());
         response.setMotorType(model.getMotorType());
         response.setPower(model.getPower());
+        response.setStatus(model.getStatus());
+        response.setType(model.getType());
+        response.setDetails(DetailsDtoMapper.toResponse(model.getDetails()));
+        response.setPrice(PricesDtoMapper.toResponse(model.getPrice()));
+
+        return response;
+    }
+
+    private CarDtoMapper() {}
+
+}
