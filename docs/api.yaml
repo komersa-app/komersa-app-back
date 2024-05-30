@@ -6,7 +6,6 @@ info:
 servers:
   - url: "http://localhost:8080/api"
 
-    # TODO: Different Schema for Dto Request & Response    
 paths:
   /admins:
     get:
@@ -20,7 +19,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Admin'
+                  $ref: '#/components/schemas/AdminDtoResponse'
 
     put:
       summary: "Save or update an admin"
@@ -31,14 +30,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Admin'
+              $ref: '#/components/schemas/AdminDtoRequest'
       responses:
         '200':
           description: "Admin saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Admin'
+                $ref: '#/components/schemas/AdminDtoResponse'
 
   /admins/{id}:
     get:
@@ -57,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Admin'
+                $ref: '#/components/schemas/AdminDtoResponse'
         '404':
           description: "Admin not found"
     delete:
@@ -88,7 +87,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Visitor'
+                  $ref: '#/components/schemas/VisitorDtoResponse'
     put:
       summary: "Save or update a visitor"
       operationId: "saveOrUpdateVisitor"
@@ -98,14 +97,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Visitor'
+              $ref: '#/components/schemas/VisitorDtoRequest'
       responses:
         '200':
           description: "Visitor saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Visitor'
+                $ref: '#/components/schemas/VisitorDtoResponse'
 
   /visitors/{id}:
     get:
@@ -124,7 +123,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Visitor'
+                $ref: '#/components/schemas/VisitorDtoResponse'
         '404':
           description: "Visitor not found"
     delete:
@@ -155,7 +154,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Appointment'
+                  $ref: '#/components/schemas/AppointmentDtoResponse'
     put:
       summary: "Save or update an appointment"
       operationId: "saveOrUpdateAppointment"
@@ -165,14 +164,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Appointment'
+              $ref: '#/components/schemas/AppointmentDtoRequest'
       responses:
         '200':
           description: "Appointment saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: '#/components/schemas/AppointmentDtoResponse'
 
   /appointments/{id}:
     get:
@@ -191,7 +190,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Appointment'
+                $ref: '#/components/schemas/AppointmentDtoResponse'
         '404':
           description: "Appointment not found"
     delete:
@@ -222,7 +221,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Car'
+                  $ref: '#/components/schemas/CarDtoResponse'
     put:
       summary: "Save or update a car"
       operationId: "saveOrUpdateCar"
@@ -232,14 +231,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Car'
+              $ref: '#/components/schemas/CarDtoRequest'
       responses:
         '200':
           description: "Car saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Car'
+                $ref: '#/components/schemas/CarDtoResponse'
 
   /cars/{id}:
     get:
@@ -258,7 +257,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Car'
+                $ref: '#/components/schemas/CarDtoResponse'
         '404':
           description: "Car not found"
     delete:
@@ -289,7 +288,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Detail'
+                  $ref: '#/components/schemas/DetailsDtoResponse'
     put:
       summary: "Save or update a detail"
       operationId: "saveOrUpdateDetail"
@@ -299,14 +298,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Detail'
+              $ref: '#/components/schemas/DetailsDtoRequest'
       responses:
         '200':
           description: "Detail saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Detail'
+                $ref: '#/components/schemas/DetailsDtoResponse'
 
   /details/{id}:
     get:
@@ -325,7 +324,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Detail'
+                $ref: '#/components/schemas/DetailsDtoResponse'
         '404':
           description: "Detail not found"
     delete:
@@ -356,7 +355,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Image'
+                  $ref: '#/components/schemas/ImageDtoResponse'
     put:
       summary: "Save or update an image"
       operationId: "saveOrUpdateImage"
@@ -366,14 +365,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Image'
+              $ref: '#/components/schemas/ImageDtoRequest'
       responses:
         '200':
           description: "Image saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Image'
+                $ref: '#/components/schemas/ImageDtoResponse'
 
   /images/{id}:
     get:
@@ -392,7 +391,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Image'
+                $ref: '#/components/schemas/ImageDtoResponse'
         '404':
           description: "Image not found"
     delete:
@@ -423,7 +422,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Price'
+                  $ref: '#/components/schemas/PriceDtoResponse'
     put:
       summary: "Save or update a price"
       operationId: "saveOrUpdatePrice"
@@ -433,14 +432,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Price'
+              $ref: '#/components/schemas/PriceDtoRequest'
       responses:
         '200':
           description: "Price saved or updated"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Price'
+                $ref: '#/components/schemas/PriceDtoResponse'
 
   /prices/{id}:
     get:
@@ -459,7 +458,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Price'
+                $ref: '#/components/schemas/PriceDtoResponse'
         '404':
           description: "Price not found"
     delete:
@@ -578,7 +577,7 @@ components:
           type: string
           example: "Just do it"
       example:
-        $ref: '#/components/examples/VisitorResponseExample'
+        $ref: '#/components/examples/VisitorDtoResponseExample'
 
     AppointmentDtoRequest:
       type: object
@@ -613,7 +612,7 @@ components:
       example:
         $ref: '#/components/examples/AppointmentDtoRequestExample'
 
-    ApointmentDtoResponse:
+    AppointmentDtoResponse:
       type: object
       properties:
         id:
@@ -713,13 +712,13 @@ components:
           type: string
           example: "Electric sedan"
         details:
-          $ref: '#/components/schema/DetailsDtoResponse'
+          $ref: '#/components/schemas/DetailsDtoResponse'
         price:
-          $ref: '#/components/schema/PriceDtoResponse'
+          $ref: '#/components/schemas/PriceDtoResponse'
       example:
         $ref: '#/components/examples/CarDtoResponseExample'
 
-    DetailDtoRequest:
+    DetailsDtoRequest:
       type: object
       properties:
         id:
@@ -732,9 +731,9 @@ components:
           type: string
           example: "S"
       example:
-        $ref: '#/components/examples/DetailRequestExample'
+        $ref: '#/components/examples/DetailsDtoRequestExample'
 
-    DetailDtoResponse:
+    DetailsDtoResponse:
       type: object
       properties:
         id:
@@ -747,7 +746,7 @@ components:
           type: string
           example: "S"
       example:
-        $ref: '#/components/examples/DetailsResponseExample'
+        $ref: '#/components/examples/DetailsDtoResponseExample'
           
     ImageDtoRequest:
       type: object
@@ -774,9 +773,9 @@ components:
           type: string
           example: "http://example.com/image.jpg"
         car:
-          ref: '#/components/schemas/CarDtoResponse'
+          $ref: '#/components/schemas/CarDtoResponse'
       example:
-        $ref: '#/components/example/ImageDtoResponseExample'
+        $ref: '#/components/examples/ImageDtoResponseExample'
 
     PriceDtoRequest:
       type: object
@@ -795,7 +794,7 @@ components:
           type: integer
           example: 1
       example:
-          $ref: '#/components/examples/PriceDtRequestExample'
+          $ref: '#/components/examples/PriceDtoRequestExample'
 
     PriceDtoResponse:
       type: object
@@ -811,7 +810,7 @@ components:
           format: date-time
           example: "2024-06-15T10:00:00Z"
         car:
-          ref: '#/components/schemas/CarDtoResponse'
+          $ref: '#/components/schemas/CarDtoResponse'
       example:
           $ref: '#/components/examples/PriceDtoResponseExample'
 
@@ -885,9 +884,12 @@ components:
         name: " appointment"
         datetime: "2024-06-15T10:00:00Z"
         status: "pending"
-        car: $ref: '#/components/examples/CarDtoResponseExample' 
-        admin: $ref: '#/components/examples/AdminDtoResponseExample' 
-        visitor: $ref: '#/components/examples/AdminDtoResponseExample'
+        car:
+          $ref: '#/components/examples/CarDtoResponseExample'
+        admin:
+          $ref: '#/components/examples/AdminDtoResponseExample'
+        visitor:
+          $ref: '#/components/examples/AdminDtoResponseExample'
     CarDtoRequestExample:
       value:
         id: 1
@@ -910,8 +912,10 @@ components:
         power: "250horsepower"
         status: "pinned"
         type: "Electric sedan"
-        details: $ref: '#/components/examples/DetailsDtoResponseExample'
-        price: $ref: '#/components/examples/PriceDtoResponseExample'
+        details:
+          $ref: '#/components/examples/DetailsDtoResponseExample'
+        price:
+          $ref: '#/components/examples/PriceDtoResponseExample'
     DetailsDtoRequestExample:
       value:
         id: 1
@@ -931,7 +935,8 @@ components:
       value:
         id: 1
         url: "http://example.com/image.jpg"
-        car: $ref: '#/components/examples/CarDtoResponseExamplExample'
+        car:
+          $ref: '#/components/examples/CarDtoResponseExample'
     PriceDtoRequestExample:
       value:
         id: 1
@@ -943,7 +948,8 @@ components:
         id: 1
         amount: "200_000.0"
         change-datetime: "2024-06-15T10:00:00Z"
-        car: $ref: '#/components/examples/CarDtoResponseExample'
+        car:
+          $ref: '#/components/examples/CarDtoResponseExample'
     LoginDtoRequestExample:
       value:
         name: "john"
@@ -952,4 +958,3 @@ components:
       value:
         name: "john"
         token: "ksogfuoiarnotirztoirztnn-oijoijoiotrzo.oiuouiuigoiois"
-          
