@@ -1,11 +1,8 @@
 package komersa.controller;
 
-import io.jsonwebtoken.lang.Assert;
 import komersa.dto.mapper.CarDtoMapper;
 import komersa.dto.request.CarDtoRequest;
 import komersa.dto.response.CarDtoResponse;
-import komersa.helper.JwtHelper;
-import komersa.model.Admin;
 import komersa.model.Car;
 import komersa.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,7 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static komersa.utils.TokenExtractor.extractToken;
+import static komersa.utils.TokenManager.verifyToken;
 
 @RestController
 @RequestMapping("/api/car")
@@ -33,12 +30,8 @@ public class CarController {
     @ApiResponse(responseCode = "201", description = "Car saved successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Invalid foreign key that is not found")
-    public ResponseEntity<CarDtoResponse> createCar(@RequestHeader("Authorization") String token, @Valid @RequestBody CarDtoRequest carDtoRequest) {
-        Admin admin = new Admin();
-        token = extractToken(token);
-        admin.setName(JwtHelper.extractUsername(token));
-        Assert.isTrue(JwtHelper.validateToken(token, admin));
-
+    public ResponseEntity<CarDtoResponse> createCar(@RequestHeader(required = false, value = "Authorization") String token, @Valid @RequestBody CarDtoRequest carDtoRequest) {
+        verifyToken(token);
         Car car = CarDtoMapper.toModel(carDtoRequest);
         car = carService.create(car);
         return new ResponseEntity<>(CarDtoMapper.toResponse(car), HttpStatus.CREATED);
@@ -67,12 +60,8 @@ public class CarController {
     @ApiResponse(responseCode = "201", description = "Car updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Car with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<CarDtoResponse> updateCar(@RequestHeader("Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody CarDtoRequest carDtoRequest) {
-        Admin admin = new Admin();
-        token = extractToken(token);
-        admin.setName(JwtHelper.extractUsername(token));
-        Assert.isTrue(JwtHelper.validateToken(token, admin));
-
+    public ResponseEntity<CarDtoResponse> updateCar(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody CarDtoRequest carDtoRequest) {
+        verifyToken(token);
         Car car = CarDtoMapper.toModel(carDtoRequest);
         car = carService.updateById(id, car);
         return new ResponseEntity<>(CarDtoMapper.toResponse(car), HttpStatus.CREATED);
@@ -81,12 +70,8 @@ public class CarController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an car", description = "Delete an car by id")
     @ApiResponse(responseCode = "204", description = "Car deleted successfully")
-    public ResponseEntity<Boolean> deleteCar(@RequestHeader("Authorization") String token, @PathVariable("id") Long id) {
-        Admin admin = new Admin();
-        token = extractToken(token);
-        admin.setName(JwtHelper.extractUsername(token));
-        Assert.isTrue(JwtHelper.validateToken(token, admin));
-
+    public ResponseEntity<Boolean> deleteCar(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id) {
+        verifyToken(token);
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }

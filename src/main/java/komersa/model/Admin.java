@@ -34,6 +34,9 @@ public class Admin extends User implements UserDetails {
         this.password = password;
         this.appointments = appointments;
     }
+    public Admin(String name) {
+        super(null, name, null);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
