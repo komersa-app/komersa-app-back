@@ -32,6 +32,4 @@ public class Appointment {
     private Admin admin;
     @ManyToOne
     private Visitor visitor;
-    @ManyToOne
-    private Appointment appointment;
 }

@@ -22,6 +22,10 @@ public class AppointmentDtoMapper {
         Visitor visitor = new Visitor();
         visitor.setId(request.getVisitorId());
         model.setVisitor(visitor);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07a37d3 (chore(Appointment): - field appointment)
         return model;
     }
 
