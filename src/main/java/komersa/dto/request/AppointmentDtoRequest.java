@@ -32,8 +32,4 @@ public class AppointmentDtoRequest {
     @Positive(message = "Visitor must be a positive number")
     @NotNull(message = "Visitor cannot be null")
     private Long visitorId;
-
-    @Positive(message = "Appointment must be a positive number")
-    @NotNull(message = "Appointment cannot be null")
-    private Long appointmentId;
 }
