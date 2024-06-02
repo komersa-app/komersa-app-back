@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import static komersa.utils.TokenManager.verifyToken;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/admins")
 public class AdminController {
     private final AdminService adminService;
 

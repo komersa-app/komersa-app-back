@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import static komersa.utils.TokenManager.verifyToken;
 
 @RestController
-@RequestMapping("/api/car")
+@RequestMapping("/api/cars")
 public class CarController {
     private final CarService carService;
 

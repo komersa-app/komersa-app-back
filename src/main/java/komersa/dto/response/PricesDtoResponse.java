@@ -15,8 +15,8 @@ public class PricesDtoResponse {
     private Long id;
 
     private Double amount;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime changeDatetime;
 
     private CarDtoResponse car;
