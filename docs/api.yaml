@@ -488,24 +488,24 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Login'
+              $ref: '#/components/schemas/LoginDtoRequest'
       responses:
         '200':
           description: "Admin's Token with name"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Price'
+                $ref: '#/components/schemas/LoginDtoResponse'
 
 components:
   schemas:
-    Admin:
+    AdminDtoRequest: 
       type: object
       properties:
         id:
           type: integer
           example: 1
-        firstname:
+        name:
           type: string
           example: "john"
         email:
@@ -518,15 +518,33 @@ components:
           type: string
           example: "password"
       example:
-        $ref: '#/components/examples/AdminExample'
-
-    Visitor:
+        $ref: '#/components/examples/AdminDtoRequestExample'
+          
+    AdminDtoResponse: 
       type: object
       properties:
         id:
           type: integer
           example: 1
-        firstname:
+        name:
+          type: string
+          example: "john"
+        email:
+          type: string
+          example: "johndoe@example.com"
+        tel:
+          type: string
+          example: "0340000000"
+      example:
+        $ref: '#/components/examples/AdminDtoResponseExample'
+          
+    VisitorDtoRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
           type: string
           example: "jane"
         email:
@@ -539,9 +557,9 @@ components:
           type: string
           example: "Just do it"
       example:
-        $ref: '#/components/examples/VisitorExample'
-
-    Appointment:
+        $ref: '#/components/examples/VisitorDtoRequestExample'
+          
+    VisitorDtoResponse:
       type: object
       properties:
         id:
@@ -549,7 +567,28 @@ components:
           example: 1
         name:
           type: string
-          example: "first appointment"
+          example: "jane"
+        email:
+          type: string
+          example: "janedoe@example.com"
+        tel:
+          type: string
+          example: "0341000000"
+        message:
+          type: string
+          example: "Just do it"
+      example:
+        $ref: '#/components/examples/VisitorResponseExample'
+
+    AppointmentDtoRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: " appointment"
         datetime:
           type: string
           format: date-time
@@ -572,9 +611,39 @@ components:
           type: integer
           example: 1
       example:
-        $ref: '#/components/examples/AppointmentExample'
+        $ref: '#/components/examples/AppointmentDtoRequestExample'
 
-    Car:
+    ApointmentDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: " appointment"
+        datetime:
+          type: string
+          format: date-time
+          example: "2024-06-15T10:00:00Z"
+        status:
+          type: string
+          enum:
+            - "pending"
+            - "validated"
+            - "rejected"
+            - "archived"
+          example: "pending"
+        car:
+          $ref: '#/components/schemas/CarDtoResponse'
+        admin:
+          $ref: '#/components/schemas/AdminDtoResponse'
+        visitor:
+          $ref: '#/components/schemas/VisitorDtoResponse'
+      example:
+        $ref: '#/components/examples/AppointmentDtoResponseExample'
+
+    CarDtoRequest:
       type: object
       properties:
         id:
@@ -611,9 +680,46 @@ components:
           type: integer
           example: 1
       example:
-        $ref: '#/components/examples/CarExample'
+        $ref: '#/components/examples/CarDtoRequestExample'
+          
+    CarDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Tesla"
+        description:
+          type: string
+          example: "Tesla Model S"
+        color:
+          type: string
+          example: "red"
+        motor-type:
+          type: integer
+          example: "electric"
+        power:
+          type: string
+          example: "250horsepower"
+        status:
+          type: string
+          enum:
+            - "pinned"
+            - "not_pinned"
+          example: "pinned"
+        type:
+          type: string
+          example: "Electric sedan"
+        details:
+          $ref: '#/components/schema/DetailsDtoResponse'
+        price:
+          $ref: '#/components/schema/PriceDtoResponse'
+      example:
+        $ref: '#/components/examples/CarDtoResponseExample'
 
-    Detail:
+    DetailDtoRequest:
       type: object
       properties:
         id:
@@ -626,9 +732,24 @@ components:
           type: string
           example: "S"
       example:
-        $ref: '#/components/examples/DetailExample'
+        $ref: '#/components/examples/DetailRequestExample'
 
-    Image:
+    DetailDtoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 1
+        brand:
+          type: string
+          example: "Tesla"
+        model:
+          type: string
+          example: "S"
+      example:
+        $ref: '#/components/examples/DetailsResponseExample'
+          
+    ImageDtoRequest:
       type: object
       properties:
         id:
@@ -641,9 +762,23 @@ components:
           type: integer
           example: 1
       example:
-        $ref: '#/components/examples/ImageExample'
+        $ref: '#/components/examples/ImageDtoRequestExample'
 
-    Price:
+    ImageDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        url:
+          type: string
+          example: "http://example.com/image.jpg"
+        car:
+          ref: '#/components/schemas/CarDtoResponse'
+      example:
+        $ref: '#/components/example/ImageDtoResponseExample'
+
+    PriceDtoRequest:
       type: object
       properties:
         id:
@@ -659,10 +794,28 @@ components:
         carId:
           type: integer
           example: 1
-        example:
-          $ref: '#/components/examples/PriceExample'
+      example:
+          $ref: '#/components/examples/PriceDtRequestExample'
 
-    Login:
+    PriceDtoResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: double
+          example: "200_000.0"
+        change-datetime:
+          type: string
+          format: date-time
+          example: "2024-06-15T10:00:00Z"
+        car:
+          ref: '#/components/schemas/CarDtoResponse'
+      example:
+          $ref: '#/components/examples/PriceDtoResponseExample'
+
+    LoginDtoRequest:
       type: object
       properties:
         name:
@@ -672,35 +825,70 @@ components:
           type: string
           example: "password"
       example:
-        $ref: '#/components/examples/LoginExample'
+        $ref: '#/components/examples/LoginDtoRequestExample'
+
+    LoginDtoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "john"
+        token:
+          type: string
+          example: "kgljsfjgsjgjsjf-jmljmlklkjmll.kjjkjjfjdffairer"
+      example:
+        $ref: '#/components/examples/LoginDtoResponseExample'
 
     # TODO: Schema & Ex for Login attempts
+    # TODO: Example for * dto *
 
   examples:
-    AdminExample:
+    AdminDtoRequestExample:
       value:
         id: 1
-        firstname: "john"
+        name: "john"
         email: "johndoe@example.com"
         tel: "0340000000"
-        password: "********"
-    VisitorExample:
+        password: "password"
+    AdminDtoResponseExample:
       value:
         id: 1
-        firstname: "Jane"
+        name: "john"
+        email: "johndoe@example.com"
+        tel: "0340000000"
+    VisitorDtoRequestExample:
+      value:
+        id: 1
+        name: "Jane"
         email: "janedoe@example.com"
         tel: "0341000000"
         message: "Just do it"
-    AppointmentExample:
+    VisitorDtoResponseExample:
       value:
         id: 1
-        name: "first appointment"
+        name: "Jane"
+        email: "janedoe@example.com"
+        tel: "0341000000"
+        message: "Just do it"
+    AppointmentDtoRequestExample:
+      value:
+        id: 1
+        name: " appointment"
         datetime: "2024-06-15T10:00:00Z"
         status: "pending"
         carId: 1
         adminId: 1
         visitorId: 1
-    CarExample:
+    AppointmentDtoResponseExample:
+      value:
+        id: 1
+        name: " appointment"
+        datetime: "2024-06-15T10:00:00Z"
+        status: "pending"
+        car: $ref: '#/components/examples/CarDtoResponseExample' 
+        admin: $ref: '#/components/examples/AdminDtoResponseExample' 
+        visitor: $ref: '#/components/examples/AdminDtoResponseExample'
+    CarDtoRequestExample:
       value:
         id: 1
         name: "Tesla"
@@ -712,23 +900,56 @@ components:
         type: "Electric sedan"
         detailsId: 1
         priceId: 1
-    DetailExample:
+    CarDtoResponseExample:
+      value:
+        id: 1
+        name: "Tesla"
+        description: "Tesla Model S"
+        color: "red"
+        motor-type: "electric"
+        power: "250horsepower"
+        status: "pinned"
+        type: "Electric sedan"
+        details: $ref: '#/components/examples/DetailsDtoResponseExample'
+        price: $ref: '#/components/examples/PriceDtoResponseExample'
+    DetailsDtoRequestExample:
       value:
         id: 1
         brand: "Tesla"
         model: "S"
-    ImageExample:
+    DetailsDtoResponseExample:
+      value:
+        id: 1
+        brand: "Tesla"
+        model: "S"
+    ImageDtoRequestExample:
       value:
         id: 1
         url: "http://example.com/image.jpg"
         carId: 1
-    PriceExample:
+    ImageDtoResponseExample:
+      value:
+        id: 1
+        url: "http://example.com/image.jpg"
+        car: $ref: '#/components/examples/CarDtoResponseExamplExample'
+    PriceDtoRequestExample:
       value:
         id: 1
         amount: "200_000.0"
         change-datetime: "2024-06-15T10:00:00Z"
         carId: 1
-    LoginExample:
+    PriceDtoResponseExample:
+      value:
+        id: 1
+        amount: "200_000.0"
+        change-datetime: "2024-06-15T10:00:00Z"
+        car: $ref: '#/components/examples/CarDtoResponseExample'
+    LoginDtoRequestExample:
       value:
         name: "john"
         password: "password"
+    LoginDtoResponseExample:
+      value:
+        name: "john"
+        token: "ksogfuoiarnotirztoirztnn-oijoijoiotrzo.oiuouiuigoiois"
+          
