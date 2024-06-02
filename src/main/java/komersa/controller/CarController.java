@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/car")
+@RequestMapping("/api/cars")
 public class CarController {
     private final CarService carService;
 

@@ -22,10 +22,6 @@ public class AppointmentDtoMapper {
         Visitor visitor = new Visitor();
         visitor.setId(request.getVisitorId());
         model.setVisitor(visitor);
-        Appointment appointment = new Appointment();
-        appointment.setId(request.getAppointmentId());
-        model.setAppointment(appointment);
-
         return model;
     }
 
@@ -39,7 +35,6 @@ public class AppointmentDtoMapper {
         response.setCar(CarDtoMapper.toResponse(model.getCar()));
         response.setAdmin(AdminDtoMapper.toResponse(model.getAdmin()));
         response.setVisitor(VisitorDtoMapper.toResponse(model.getVisitor()));
-        response.setAppointment(AppointmentDtoMapper.toResponse(model.getAppointment()));
 
         return response;
     }

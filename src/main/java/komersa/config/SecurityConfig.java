@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+	// TODO: Fix & Reuse pswd encoder if necessary
   /*
 
   === Password Encoder ===
@@ -49,6 +50,8 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .build();
   }
+
+  // TODO: Fix & Reuse aut manager
 
   /*
 

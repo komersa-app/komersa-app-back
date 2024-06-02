@@ -26,6 +26,4 @@ public class AppointmentDtoResponse {
     private AdminDtoResponse admin;
 
     private VisitorDtoResponse visitor;
-
-    private AppointmentDtoResponse appointment;
 }

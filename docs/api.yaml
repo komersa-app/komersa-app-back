@@ -6,6 +6,7 @@ info:
 servers:
   - url: "http://localhost:8080/api"
 
+    # TODO: Different Schema for Dto Request & Response    
 paths:
   /admins:
     get:
@@ -48,8 +49,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single admin"
@@ -67,8 +68,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Admin deleted"
@@ -115,8 +116,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single visitor"
@@ -134,8 +135,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Visitor deleted"
@@ -182,8 +183,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single appointment"
@@ -201,8 +202,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Appointment deleted"
@@ -249,8 +250,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single car"
@@ -268,8 +269,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Car deleted"
@@ -316,8 +317,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single detail"
@@ -335,8 +336,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Detail deleted"
@@ -383,8 +384,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single image"
@@ -402,8 +403,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Image deleted"
@@ -450,8 +451,8 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '200':
           description: "A single price"
@@ -469,13 +470,32 @@ paths:
           in: path
           required: true
           schema:
-            type: string
-            example: "1"
+            type: integer
+            example: 1
       responses:
         '204':
           description: "Price deleted"
         '404':
           description: "Price not found"
+
+  /login:
+    post:
+      summary: "Authenticate Admin"
+      operationId: "athenticateAdmin"
+      requestBody:
+        description: "Admin's Credentials"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: "Admin's Token with name"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
 
 components:
   schemas:
@@ -484,14 +504,19 @@ components:
       properties:
         id:
           type: integer
+          example: 1
         firstname:
           type: string
+          example: "john"
         email:
           type: string
+          example: "johndoe@example.com"
         tel:
           type: string
+          example: "0340000000"
         password:
           type: string
+          example: "password"
       example:
         $ref: '#/components/examples/AdminExample'
 
@@ -500,14 +525,19 @@ components:
       properties:
         id:
           type: integer
+          example: 1
         firstname:
           type: string
+          example: "jane"
         email:
           type: string
+          example: "janedoe@example.com"
         tel:
           type: string
+          example: "0341000000"
         message:
           type: string
+          example: "Just do it"
       example:
         $ref: '#/components/examples/VisitorExample'
 
@@ -516,18 +546,31 @@ components:
       properties:
         id:
           type: integer
+          example: 1
         name:
           type: string
+          example: "first appointment"
         datetime:
           type: string
           format: date-time
+          example: "2024-06-15T10:00:00Z"
         status:
           type: string
           enum:
-            - pending
-            - validated
-            - rejected
-            - archived
+            - "pending"
+            - "validated"
+            - "rejected"
+            - "archived"
+          example: "pending"
+        carId:
+          type: integer
+          example: 1
+        adminId:
+          type: integer
+          example: 1
+        visitorId:
+          type: integer
+          example: 1
       example:
         $ref: '#/components/examples/AppointmentExample'
 
@@ -536,23 +579,37 @@ components:
       properties:
         id:
           type: integer
+          example: 1
         name:
           type: string
+          example: "Tesla"
         description:
           type: string
+          example: "Tesla Model S"
         color:
           type: string
+          example: "red"
         motor-type:
           type: integer
+          example: "electric"
         power:
           type: string
+          example: "250horsepower"
         status:
           type: string
           enum:
-            - pinned
-            - not_pinned
+            - "pinned"
+            - "not_pinned"
+          example: "pinned"
         type:
           type: string
+          example: "Electric sedan"
+        detailsId:
+          type: integer
+          example: 1
+        priceId:
+          type: integer
+          example: 1
       example:
         $ref: '#/components/examples/CarExample'
 
@@ -561,10 +618,13 @@ components:
       properties:
         id:
           type: string
+          example: 1
         brand:
           type: string
+          example: "Tesla"
         model:
           type: string
+          example: "S"
       example:
         $ref: '#/components/examples/DetailExample'
 
@@ -572,9 +632,14 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
+          example: 1
         url:
           type: string
+          example: "http://example.com/image.jpg"
+        carId:
+          type: integer
+          example: 1
       example:
         $ref: '#/components/examples/ImageExample'
 
@@ -586,50 +651,84 @@ components:
         amount:
           type: number
           format: double
+          example: "200_000.0"
         change-datetime:
           type: string
           format: date-time
+          example: "2024-06-15T10:00:00Z"
+        carId:
+          type: integer
+          example: 1
         example:
           $ref: '#/components/examples/PriceExample'
+
+    Login:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "john"
+        password:
+          type: string
+          example: "password"
+      example:
+        $ref: '#/components/examples/LoginExample'
+
+    # TODO: Schema & Ex for Login attempts
 
   examples:
     AdminExample:
       value:
-        id: "1"
+        id: 1
         firstname: "john"
         email: "johndoe@example.com"
+        tel: "0340000000"
         password: "********"
     VisitorExample:
       value:
-        id: "1"
+        id: 1
         firstname: "Jane"
         email: "janedoe@example.com"
+        tel: "0341000000"
+        message: "Just do it"
     AppointmentExample:
       value:
-        id: "1"
+        id: 1
         name: "first appointment"
         datetime: "2024-06-15T10:00:00Z"
         status: "pending"
+        carId: 1
+        adminId: 1
+        visitorId: 1
     CarExample:
       value:
-        id: "1"
+        id: 1
         name: "Tesla"
         description: "Tesla Model S"
+        color: "red"
         motor-type: "electric"
         power: "250horsepower"
         status: "pinned"
         type: "Electric sedan"
+        detailsId: 1
+        priceId: 1
     DetailExample:
       value:
-        id: "1"
+        id: 1
         brand: "Tesla"
         model: "S"
     ImageExample:
       value:
-        id: "1"
+        id: 1
         url: "http://example.com/image.jpg"
+        carId: 1
     PriceExample:
       value:
-        id: "1"
-        amount: "$39.990"
+        id: 1
+        amount: "200_000.0"
         change-datetime: "2024-06-15T10:00:00Z"
+        carId: 1
+    LoginExample:
+      value:
+        name: "john"
+        password: "password"

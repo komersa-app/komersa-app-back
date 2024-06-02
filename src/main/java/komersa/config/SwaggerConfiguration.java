@@ -9,6 +9,8 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// TODO: Fix - Why Swagger UI no works on '/authentication-docs/swagger-ui/index.html'
+
 @Configuration
 public class SwaggerConfiguration {
 
@@ -31,6 +33,6 @@ public class SwaggerConfiguration {
         .title("Authentication Service Api Doc")
         .version("1.0.0")
         .description("HTTP APIs to manage user registration and authentication.")
-        .contact(new Contact().name("Mina Rashidi"));
+        .contact(new Contact().name("Komersa Inc"));
   }
 }

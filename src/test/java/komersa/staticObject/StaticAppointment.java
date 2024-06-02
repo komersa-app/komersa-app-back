@@ -42,8 +42,6 @@ public class StaticAppointment {
         dtoRequest.setStatus("status");
         dtoRequest.setCarId(1L);
         dtoRequest.setAdminId(1L);
-        dtoRequest.setVisitorId(1L);
-        dtoRequest.setAppointmentId(1L);
         return dtoRequest;
     }
 
@@ -56,7 +54,6 @@ public class StaticAppointment {
         dtoResponse.setCar(StaticCar.carDtoResponse1());
         dtoResponse.setAdmin(StaticAdmin.adminDtoResponse1());
         dtoResponse.setVisitor(StaticVisitor.visitorDtoResponse1());
-        dtoResponse.setAppointment(StaticAppointment.appointmentDtoResponse1());
         return dtoResponse;
     }
 
@@ -69,7 +66,6 @@ public class StaticAppointment {
         dtoResponse.setCar(StaticCar.carDtoResponse2());
         dtoResponse.setAdmin(StaticAdmin.adminDtoResponse2());
         dtoResponse.setVisitor(StaticVisitor.visitorDtoResponse2());
-        dtoResponse.setAppointment(StaticAppointment.appointmentDtoResponse1());
         return dtoResponse;
     }
 }
