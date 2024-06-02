@@ -115,7 +115,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -132,6 +131,62 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--
+            TODO: Generate openapi.yaml file in execution time
+            TODO: Use openapi generator
+
+                - can access json on : http://localhost:8080/v3/api-docs
+                - can access ui on : http://localhost:8080/swagger-ui/index.html#/
+            -->
+            <!--
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.3.4.RELEASE</version>
+                <configuration>
+                    <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pre-integration-test</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-integration-test</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <id>integration-test</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <apiDocsUrl>http://localhost:8080/v3/api-docs</apiDocsUrl>
+                    <outputFileName>openapi.yaml</outputFileName>
+                    <outputDir>${basedir}/generated/swagger-specs</outputDir>
+                    <outputDir>home/springdoc/maven-output</outputDir>
+
+            <skip>false</skip>
+            <headers>
+                <header1key>header1value</header1key>
+                <header2key>header2value</header2key>
+            </headers>
+        </configuration>
+    </plugin>
+            -->
         </plugins>
     </build>
 
