@@ -498,7 +498,7 @@ paths:
 
 components:
   schemas:
-    AdminDtoRequest: 
+    AdminDtoRequest:
       type: object
       properties:
         id:
@@ -518,8 +518,8 @@ components:
           example: "password"
       example:
         $ref: '#/components/examples/AdminDtoRequestExample'
-          
-    AdminDtoResponse: 
+
+    AdminDtoResponse:
       type: object
       properties:
         id:
@@ -839,7 +839,6 @@ components:
         $ref: '#/components/examples/LoginDtoResponseExample'
 
     # TODO: Schema & Ex for Login attempts
-    # TODO: Example for * dto *
 
   examples:
     AdminDtoRequestExample:
