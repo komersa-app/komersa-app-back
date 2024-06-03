@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record LoginDtoRequest(
-        @Schema(description = "name", example = "john.doe")
-        @NotBlank(message = "Email cannot be blank")
+        @Schema(description = "name", example = "john")
+        @NotBlank(message = "Name cannot be blank")
         String name,
 
         @Schema(description = "password", example = "123456")
