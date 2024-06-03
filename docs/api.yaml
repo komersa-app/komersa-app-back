@@ -516,8 +516,8 @@ components:
         password:
           type: string
           example: "password"
-      example:
-        $ref: '#/components/examples/AdminDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/AdminDtoRequestExample'
 
     AdminDtoResponse:
       type: object
@@ -534,8 +534,8 @@ components:
         tel:
           type: string
           example: "0340000000"
-      example:
-        $ref: '#/components/examples/AdminDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/AdminDtoResponseExample'
           
     VisitorDtoRequest:
       type: object
@@ -555,8 +555,8 @@ components:
         message:
           type: string
           example: "Just do it"
-      example:
-        $ref: '#/components/examples/VisitorDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/VisitorDtoRequestExample'
           
     VisitorDtoResponse:
       type: object
@@ -576,8 +576,8 @@ components:
         message:
           type: string
           example: "Just do it"
-      example:
-        $ref: '#/components/examples/VisitorDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/VisitorDtoResponseExample'
 
     AppointmentDtoRequest:
       type: object
@@ -609,8 +609,8 @@ components:
         visitorId:
           type: integer
           example: 1
-      example:
-        $ref: '#/components/examples/AppointmentDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/AppointmentDtoRequestExample'
 
     AppointmentDtoResponse:
       type: object
@@ -639,8 +639,8 @@ components:
           $ref: '#/components/schemas/AdminDtoResponse'
         visitor:
           $ref: '#/components/schemas/VisitorDtoResponse'
-      example:
-        $ref: '#/components/examples/AppointmentDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/AppointmentDtoResponseExample'
 
     CarDtoRequest:
       type: object
@@ -678,8 +678,8 @@ components:
         priceId:
           type: integer
           example: 1
-      example:
-        $ref: '#/components/examples/CarDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/CarDtoRequestExample'
           
     CarDtoResponse:
       type: object
@@ -715,8 +715,8 @@ components:
           $ref: '#/components/schemas/DetailsDtoResponse'
         price:
           $ref: '#/components/schemas/PriceDtoResponse'
-      example:
-        $ref: '#/components/examples/CarDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/CarDtoResponseExample'
 
     DetailsDtoRequest:
       type: object
@@ -730,8 +730,8 @@ components:
         model:
           type: string
           example: "S"
-      example:
-        $ref: '#/components/examples/DetailsDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/DetailsDtoRequestExample'
 
     DetailsDtoResponse:
       type: object
@@ -745,8 +745,8 @@ components:
         model:
           type: string
           example: "S"
-      example:
-        $ref: '#/components/examples/DetailsDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/DetailsDtoResponseExample'
           
     ImageDtoRequest:
       type: object
@@ -760,8 +760,8 @@ components:
         carId:
           type: integer
           example: 1
-      example:
-        $ref: '#/components/examples/ImageDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/ImageDtoRequestExample'
 
     ImageDtoResponse:
       type: object
@@ -774,8 +774,8 @@ components:
           example: "http://example.com/image.jpg"
         car:
           $ref: '#/components/schemas/CarDtoResponse'
-      example:
-        $ref: '#/components/examples/ImageDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/ImageDtoResponseExample'
 
     PriceDtoRequest:
       type: object
@@ -793,8 +793,8 @@ components:
         carId:
           type: integer
           example: 1
-      example:
-          $ref: '#/components/examples/PriceDtoRequestExample'
+      #example:
+          #$ref: '#/components/examples/PriceDtoRequestExample'
 
     PriceDtoResponse:
       type: object
@@ -811,8 +811,8 @@ components:
           example: "2024-06-15T10:00:00Z"
         car:
           $ref: '#/components/schemas/CarDtoResponse'
-      example:
-          $ref: '#/components/examples/PriceDtoResponseExample'
+      #example:
+          #$ref: '#/components/examples/PriceDtoResponseExample'
 
     LoginDtoRequest:
       type: object
@@ -823,8 +823,8 @@ components:
         password:
           type: string
           example: "password"
-      example:
-        $ref: '#/components/examples/LoginDtoRequestExample'
+      #example:
+        #$ref: '#/components/examples/LoginDtoRequestExample'
 
     LoginDtoResponse:
       type: object
@@ -835,8 +835,8 @@ components:
         token:
           type: string
           example: "kgljsfjgsjgjsjf-jmljmlklkjmll.kjjkjjfjdffairer"
-      example:
-        $ref: '#/components/examples/LoginDtoResponseExample'
+      #example:
+        #$ref: '#/components/examples/LoginDtoResponseExample'
 
     # TODO: Schema & Ex for Login attempts
 
