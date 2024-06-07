@@ -1,0 +1,1656 @@
+openapi: 3.0.1
+info:
+  title: Komersa Api Doc
+  description: HTTP APIs for managing e-commerce resources
+  contact:
+    name: Komersa Inc
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /api/visitor/{id}:
+    get:
+      tags:
+      - visitor-controller
+      summary: Get Visitor
+      description: Get Visitor By Id
+      operationId: getVisitorById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Visitor Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+        "404":
+          description: Visitor with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+    put:
+      tags:
+      - visitor-controller
+      summary: Update an visitor
+      description: Update an visitor by Id and new Visitor
+      operationId: updateVisitor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitorDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Visitor updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+        "404":
+          description: Visitor with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+    delete:
+      tags:
+      - visitor-controller
+      summary: Delete an visitor
+      description: Delete an visitor by id
+      operationId: deleteVisitor
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Visitor deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/prices/{id}:
+    get:
+      tags:
+      - prices-controller
+      summary: Get Prices
+      description: Get Prices By Id
+      operationId: getPricesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Prices with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+        "200":
+          description: Prices Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+    put:
+      tags:
+      - prices-controller
+      summary: Update an prices
+      description: Update an prices by Id and new Prices
+      operationId: updatePrices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricesDtoRequest'
+        required: true
+      responses:
+        "404":
+          description: Prices with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+        "201":
+          description: Prices updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+    delete:
+      tags:
+      - prices-controller
+      summary: Delete an prices
+      description: Delete an prices by id
+      operationId: deletePrices
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Prices deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/images/{id}:
+    get:
+      tags:
+      - images-controller
+      summary: Get Images
+      description: Get Images By Id
+      operationId: getImagesById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Images Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+        "404":
+          description: Images with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+    put:
+      tags:
+      - images-controller
+      summary: Update an images
+      description: Update an images by Id and new Images
+      operationId: updateImages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImagesDtoRequest'
+        required: true
+      responses:
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+        "404":
+          description: Images with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+        "201":
+          description: Images updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+    delete:
+      tags:
+      - images-controller
+      summary: Delete an images
+      description: Delete an images by id
+      operationId: deleteImages
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Images deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/details/{id}:
+    get:
+      tags:
+      - details-controller
+      summary: Get Details
+      description: Get Details By Id
+      operationId: getDetailsById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Details Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+        "404":
+          description: Details with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+    put:
+      tags:
+      - details-controller
+      summary: Update an details
+      description: Update an details by Id and new Details
+      operationId: updateDetails
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetailsDtoRequest'
+        required: true
+      responses:
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+        "404":
+          description: Details with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+        "201":
+          description: Details updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+    delete:
+      tags:
+      - details-controller
+      summary: Delete an details
+      description: Delete an details by id
+      operationId: deleteDetails
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Details deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/cars/{id}:
+    get:
+      tags:
+      - car-controller
+      summary: Get Car
+      description: Get Car By Id
+      operationId: getCarById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Car with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+        "200":
+          description: Car Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+    put:
+      tags:
+      - car-controller
+      summary: Update an car
+      description: Update an car by Id and new Car
+      operationId: updateCar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Car updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+        "404":
+          description: Car with such an Id not found or invalid foreign key that is
+            not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+    delete:
+      tags:
+      - car-controller
+      summary: Delete an car
+      description: Delete an car by id
+      operationId: deleteCar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Car deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/appointments/{id}:
+    get:
+      tags:
+      - appointment-controller
+      summary: Get Appointment
+      description: Get Appointment By Id
+      operationId: getAppointmentById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "404":
+          description: Appointment with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+        "200":
+          description: Appointment Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+    put:
+      tags:
+      - appointment-controller
+      summary: Update an appointment
+      description: Update an appointment by Id and new Appointment
+      operationId: updateAppointment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentDtoRequest'
+        required: true
+      responses:
+        "404":
+          description: Appointment with such an Id not found or invalid foreign key
+            that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+        "201":
+          description: Appointment updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+    delete:
+      tags:
+      - appointment-controller
+      summary: Delete an appointment
+      description: Delete an appointment by id
+      operationId: deleteAppointment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Appointment deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/admins/{id}:
+    get:
+      tags:
+      - admin-controller
+      summary: Get Admin
+      description: Get Admin By Id
+      operationId: getAdminById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Admin Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+        "404":
+          description: Admin with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+    put:
+      tags:
+      - admin-controller
+      summary: Update an admin
+      description: Update an admin by Id and new Admin
+      operationId: updateAdmin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Admin updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+        "404":
+          description: Admin with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+    delete:
+      tags:
+      - admin-controller
+      summary: Delete an admin
+      description: Delete an admin by id
+      operationId: deleteAdmin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Admin deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/visitor:
+    get:
+      tags:
+      - visitor-controller
+      summary: Get All Visitor
+      description: Get All Visitor
+      operationId: getAllVisitor
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: No records with Visitor have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageVisitorDtoResponse'
+        "200":
+          description: Visitor Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageVisitorDtoResponse'
+    post:
+      tags:
+      - visitor-controller
+      summary: Create an visitor
+      description: Create new visitor
+      operationId: createVisitor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitorDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Visitor saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/VisitorDtoResponse'
+  /api/prices:
+    get:
+      tags:
+      - prices-controller
+      summary: Get All Prices
+      description: Get All Prices
+      operationId: getAllPrices
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Prices Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PagePricesDtoResponse'
+        "404":
+          description: No records with Prices have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PagePricesDtoResponse'
+    post:
+      tags:
+      - prices-controller
+      summary: Create an prices
+      description: Create new prices
+      operationId: createPrices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricesDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Prices saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PricesDtoResponse'
+  /api/images:
+    get:
+      tags:
+      - images-controller
+      summary: Get All Images
+      description: Get All Images
+      operationId: getAllImages
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: No records with Images have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageImagesDtoResponse'
+        "200":
+          description: Images Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageImagesDtoResponse'
+    post:
+      tags:
+      - images-controller
+      summary: Create an images
+      description: Create new images
+      operationId: createImages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImagesDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Images saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ImagesDtoResponse'
+  /api/details:
+    get:
+      tags:
+      - details-controller
+      summary: Get All Details
+      description: Get All Details
+      operationId: getAllDetails
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "404":
+          description: No records with Details have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDetailsDtoResponse'
+        "200":
+          description: Details Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageDetailsDtoResponse'
+    post:
+      tags:
+      - details-controller
+      summary: Create an details
+      description: Create new details
+      operationId: createDetails
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetailsDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Details saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DetailsDtoResponse'
+  /api/cars:
+    get:
+      tags:
+      - car-controller
+      summary: Get All Car
+      description: Get All Car
+      operationId: getAllCar
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: description
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: color
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: motorType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: power
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: status
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Car Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageCarDtoResponse'
+        "404":
+          description: No records with Car have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageCarDtoResponse'
+    post:
+      tags:
+      - car-controller
+      summary: Create an car
+      description: Create new car
+      operationId: createCar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Car saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarDtoResponse'
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      summary: Authenticate user and return token
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDtoRequest'
+        required: true
+      responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "401":
+          description: Unauthorized
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
+  /api/appointments:
+    get:
+      tags:
+      - appointment-controller
+      summary: Get All Appointment
+      description: Get All Appointment
+      operationId: getAllAppointment
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Appointment Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAppointmentDtoResponse'
+        "404":
+          description: No records with Appointment have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAppointmentDtoResponse'
+    post:
+      tags:
+      - appointment-controller
+      summary: Create an appointment
+      description: Create new appointment
+      operationId: createAppointment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Appointment saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AppointmentDtoResponse'
+  /api/admins:
+    get:
+      tags:
+      - admin-controller
+      summary: Get All Admin
+      description: Get All Admin
+      operationId: getAllAdmin
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Admin Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAdminDtoResponse'
+        "404":
+          description: No records with Admin have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageAdminDtoResponse'
+    post:
+      tags:
+      - admin-controller
+      summary: Create an admin
+      description: Create new admin
+      operationId: createAdmin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Admin saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/AdminDtoResponse'
+  /api/auth/loginAttempts:
+    get:
+      tags:
+      - login-controller
+      summary: Get recent login attempts
+      operationId: loginAttempts
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+components:
+  schemas:
+    VisitorDtoRequest:
+      required:
+      - email
+      - message
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+    VisitorDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+    PricesDtoRequest:
+      required:
+      - amount
+      - changeDatetime
+      type: object
+      properties:
+        amount:
+          type: number
+          format: double
+        changeDatetime:
+          type: string
+          format: date-time
+    PricesDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        amount:
+          type: number
+          format: double
+        changeDatetime:
+          type: string
+          format: date-time
+    ImagesDtoRequest:
+      required:
+      - carId
+      - url
+      type: object
+      properties:
+        url:
+          type: string
+        carId:
+          type: integer
+          format: int64
+    CarDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        motorType:
+          type: string
+        power:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        details:
+          $ref: '#/components/schemas/DetailsDtoResponse'
+        price:
+          $ref: '#/components/schemas/PricesDtoResponse'
+    DetailsDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        brand:
+          type: string
+        model:
+          type: string
+    ImagesDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        url:
+          type: string
+        car:
+          $ref: '#/components/schemas/CarDtoResponse'
+    DetailsDtoRequest:
+      required:
+      - brand
+      - model
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+    CarDtoRequest:
+      required:
+      - color
+      - description
+      - detailsId
+      - motorType
+      - name
+      - power
+      - priceId
+      - status
+      - type
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        motorType:
+          type: string
+        power:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        detailsId:
+          type: integer
+          format: int64
+        priceId:
+          type: integer
+          format: int64
+    AppointmentDtoRequest:
+      required:
+      - adminId
+      - carId
+      - name
+      - status
+      - visitorId
+      type: object
+      properties:
+        name:
+          type: string
+        status:
+          type: string
+        carId:
+          type: integer
+          format: int64
+        adminId:
+          type: integer
+          format: int64
+        visitorId:
+          type: integer
+          format: int64
+    AdminDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    AppointmentDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        datetime:
+          type: string
+          format: date-time
+        status:
+          type: string
+        car:
+          $ref: '#/components/schemas/CarDtoResponse'
+        admin:
+          $ref: '#/components/schemas/AdminDtoResponse'
+        visitor:
+          $ref: '#/components/schemas/VisitorDtoResponse'
+    AdminDtoRequest:
+      required:
+      - email
+      - name
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    LoginDtoRequest:
+      required:
+      - name
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+          example: john
+        password:
+          maxLength: 20
+          minLength: 6
+          type: string
+          description: password
+          example: "123456"
+    ApiErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          description: Error code
+          format: int32
+        description:
+          type: string
+          description: Error description
+    LoginDtoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+        token:
+          type: string
+          description: JWT token
+    Pageable:
+      type: object
+      properties:
+        page:
+          minimum: 0
+          type: integer
+          format: int32
+        size:
+          minimum: 1
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            type: string
+    PageVisitorDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/VisitorDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+        offset:
+          type: integer
+          format: int64
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+    SortObject:
+      type: object
+      properties:
+        direction:
+          type: string
+        nullHandling:
+          type: string
+        ascending:
+          type: boolean
+        property:
+          type: string
+        ignoreCase:
+          type: boolean
+    PagePricesDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/PricesDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageImagesDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImagesDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageDetailsDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/DetailsDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageCarDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageAppointmentDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AppointmentDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageAdminDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+  securitySchemes:
+    Bearer Authentication:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

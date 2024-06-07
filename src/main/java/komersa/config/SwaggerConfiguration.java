@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfiguration {
-
+/*
   @Bean
   public OpenAPI openAPI() {
     return new OpenAPI()
@@ -26,11 +26,13 @@ public class SwaggerConfiguration {
         .scheme("bearer");
   }
 
+ */
+
   private Info apiInfo() {
     return new Info()
-        .title("Authentication Service Api Doc")
+        .title("Komersa Api Doc")
         .version("1.0.0")
-        .description("HTTP APIs to manage user registration and authentication.")
+        .description("HTTP APIs for managing e-commerce resources")
         .contact(new Contact().name("Komersa Inc"));
   }
   // TODO: configure openapi yaml file generator

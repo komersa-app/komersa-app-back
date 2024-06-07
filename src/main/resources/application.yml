@@ -16,6 +16,17 @@ spring:
       pageable:
         one-indexed-parameters: true
 
+
 swagger:
   documentation:
     uri: uri
+
+    # TODO: springdoc -> yaml config
+#springdoc:
+ # api-docs:
+  #  enabled: true
+   # path: docs/openapi.yaml
+ # swagger-ui:
+  #  enabled: true
+   # urls:
+    #  - url: docs/openapi.yaml
