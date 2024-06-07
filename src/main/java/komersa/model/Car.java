@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.awt.*;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Car{
     private Long id;
     @Column(name = "name")
     private String name;
-    @Column(name = "descritption")
+    @Column(name = "description")
     private String description;
     @Column(name = "color")
     private String color;
@@ -36,8 +37,10 @@ public class Car{
     private List<Images> images;
     @OneToMany(mappedBy = "car")
     private List<Appointment> appointments;
+
     @ManyToOne
     private Details details;
+
     @OneToOne
     private Prices price;
 }

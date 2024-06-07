@@ -25,8 +25,4 @@ public class PricesDtoRequest {
     @NotNull(message = "Datetime cannot be null")
     @NotBlank(message = "Datetime cannot be blank")
     private LocalDateTime changeDatetime;
-
-    @Positive(message = "Car must be a positive number")
-    @NotNull(message = "Car cannot be null")
-    private Long carId;
 }

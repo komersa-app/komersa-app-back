@@ -9,13 +9,8 @@ public class PricesDtoMapper {
 
     public static Prices toModel(PricesDtoRequest request) {
         Prices model = new Prices();
-
         model.setAmount(request.getAmount());
-
-        // TODO: Set all attributes with builder or constructor
-
         Car car = new Car();
-        car.setId(request.getCarId());
         model.setCar(car);
 
         return model;
@@ -23,11 +18,9 @@ public class PricesDtoMapper {
 
     public static PricesDtoResponse toResponse(Prices model) {
         PricesDtoResponse response = new PricesDtoResponse();
-
         response.setId(model.getId());
         response.setAmount(model.getAmount());
         response.setChangeDatetime(model.getChangeDatetime());
-        response.setCar(CarDtoMapper.toResponse(model.getCar()));
 
         return response;
     }

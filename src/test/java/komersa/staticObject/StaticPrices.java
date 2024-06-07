@@ -31,7 +31,6 @@ public class StaticPrices {
     public static PricesDtoRequest pricesDtoRequest1() {
         PricesDtoRequest dtoRequest = new PricesDtoRequest();
         dtoRequest.setAmount(10D);
-        dtoRequest.setCarId(1L);
         return dtoRequest;
     }
 
@@ -40,7 +39,6 @@ public class StaticPrices {
         dtoResponse.setId(ID);
         dtoResponse.setAmount(10D);
         dtoResponse.setChangeDatetime(LocalDateTime.MIN);
-        dtoResponse.setCar(StaticCar.carDtoResponse1());
         return dtoResponse;
     }
 
@@ -49,7 +47,6 @@ public class StaticPrices {
         dtoResponse.setId(ID);
         dtoResponse.setAmount(20D);
         dtoResponse.setChangeDatetime(LocalDateTime.MIN);
-        dtoResponse.setCar(StaticCar.carDtoResponse1());
         return dtoResponse;
     }
 }

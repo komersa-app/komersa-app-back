@@ -16,7 +16,7 @@ public class CarService {
     private final DetailsService detailsService;
     private final PricesService pricesService;
 
-    public CarService(@Lazy PricesService pricesService, DetailsService detailsService, CarRepository carRepository) {
+    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository) {
         this.pricesService = pricesService;
         this.detailsService = detailsService;
         this.carRepository = carRepository;
