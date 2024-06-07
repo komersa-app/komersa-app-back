@@ -72,13 +72,13 @@ public class CarController {
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
     }
     @GetMapping("/search")
-    public List<Car> searchCars(@RequestParam("name") String name,
-                                @RequestParam("description") String description,
-                                @RequestParam("color") String color,
-                                @RequestParam("motorType") String motorType,
-                                @RequestParam("power") String power,
-                                @RequestParam("status") String status,
-                                @RequestParam("type") String type) {
+    public List<Car> searchCars(@RequestParam(required = false) String name,
+                                @RequestParam(required = false) String description,
+                                @RequestParam(required = false) String color,
+                                @RequestParam(required = false) String motorType,
+                                @RequestParam(required = false) String power,
+                                @RequestParam(required = false) String status,
+                                @RequestParam(required = false) String type) {
         Car criteriaCar = new Car();
         criteriaCar.setName(name);
         criteriaCar.setDescription(description);
