@@ -43,4 +43,14 @@ public class Car{
 
     @OneToOne
     private Prices price;
+
+    public Car(String name, String description, String color, String motorType, String power, String status, String type) {
+        this.name = name;
+        this.description = description;
+        this.color = color;
+        this.motorType = motorType;
+        this.power = power;
+        this.status = status;
+        this.type = type;
+    }
 }

@@ -11,6 +11,10 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  data:
+    web:
+      pageable:
+        one-indexed-parameters: true
 
 swagger:
   documentation:

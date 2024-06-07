@@ -49,8 +49,25 @@ public class CarController {
     @Operation(summary = "Get All Car", description = "Get All Car")
     @ApiResponse(responseCode = "200", description = "Car Get All successfully")
     @ApiResponse(responseCode = "404", description = "No records with Car have been found")
-    public ResponseEntity<Page<CarDtoResponse>> getAllCar(Pageable pageable) {
-        Page<Car> carPage = carService.getAll(pageable);
+    public ResponseEntity<Page<CarDtoResponse>> getAllCar(Pageable pageable,
+        @RequestParam(required = false, value = "name") String name,
+          @RequestParam(required = false, value = "description") String description,
+          @RequestParam(required = false, value = "color") String color,
+          @RequestParam(required = false, value = "motorType") String motorType,
+          @RequestParam(required = false, value = "power") String power,
+          @RequestParam(required = false, value = "status") String status,
+          @RequestParam(required = false, value = "type") String type
+    ) {
+        Page<Car> carPage = carService.findByCriteria(new Car(
+                name,
+                description,
+                color,
+                motorType,
+                power,
+                status,
+                type
+        ), pageable);
+        //Page<Car> carPage = carService.getAll(pageable);
         return new ResponseEntity<>(carPage.map(CarDtoMapper::toResponse), HttpStatus.OK);
     }
 
@@ -70,24 +87,5 @@ public class CarController {
     @ApiResponse(responseCode = "204", description = "Car deleted successfully")
     public ResponseEntity<Boolean> deleteCar(@PathVariable("id") Long id) {
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping("/search")
-    public List<Car> searchCars(@RequestParam("name") String name,
-                                @RequestParam("description") String description,
-                                @RequestParam("color") String color,
-                                @RequestParam("motorType") String motorType,
-                                @RequestParam("power") String power,
-                                @RequestParam("status") String status,
-                                @RequestParam("type") String type) {
-        Car criteriaCar = new Car();
-        criteriaCar.setName(name);
-        criteriaCar.setDescription(description);
-        criteriaCar.setColor(color);
-        criteriaCar.setMotorType(motorType);
-        criteriaCar.setPower(power);
-        criteriaCar.setStatus(status);
-        criteriaCar.setType(type);
-        return carService.findByCriteria(criteriaCar);
     }
 }

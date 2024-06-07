@@ -61,7 +61,7 @@ public class CarService {
         return true;
     }
 
-    public List<Car> findByCriteria(Car criteriaCar) {
-        return carRepo.findByCriteria(criteriaCar);
+    public Page<Car> findByCriteria(Car criteriaCar, Pageable pageable) {
+        return carRepo.findByCriteria(criteriaCar, pageable);
     }
 }
