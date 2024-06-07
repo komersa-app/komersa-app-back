@@ -13,16 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class PricesService {
     private final PricesRepository pricesRepository;
-    private final CarService carService;
 
-    public PricesService(@Lazy CarService carService, PricesRepository pricesRepository) {
-        this.carService = carService;
+    public PricesService(PricesRepository pricesRepository) {
         this.pricesRepository = pricesRepository;
     }
 
     public Prices create(Prices prices) {
         log.info("Prices create: {}", prices);
-        prices.setCar(carService.getById(prices.getCar().getId()));
         return pricesRepository.save(prices);
     }
 
@@ -39,7 +36,6 @@ public class PricesService {
     public Prices updateById(Long id, Prices prices) {
         getById(id);
         prices.setId(id);
-        prices.setCar(carService.getById(prices.getCar().getId()));
         log.info("Prices update by id: {}", prices);
         return pricesRepository.save(prices);
     }

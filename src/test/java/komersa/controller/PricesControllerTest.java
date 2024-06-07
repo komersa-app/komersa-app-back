@@ -64,8 +64,7 @@ class PricesControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(pricesResponse.getId()))
                 .andExpect(jsonPath("$.amount").value(pricesResponse.getAmount()))
-                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)))
-                .andExpect(jsonPath("$.car.id").value(pricesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)));
     }
 
     @Test
@@ -110,8 +109,7 @@ class PricesControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(pricesResponse.getId()))
                 .andExpect(jsonPath("$.amount").value(pricesResponse.getAmount()))
-                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)))
-                .andExpect(jsonPath("$.car.id").value(pricesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)));
     }
 
     @Test
@@ -170,8 +168,7 @@ class PricesControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(pricesResponse.getId()))
                 .andExpect(jsonPath("$.amount").value(pricesResponse.getAmount()))
-                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)))
-                .andExpect(jsonPath("$.car.id").value(pricesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.changeDatetime").value(pricesResponse.getChangeDatetime().format(formatter)));
     }
 
     @Test

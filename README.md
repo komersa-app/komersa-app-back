@@ -39,7 +39,7 @@ powershell -Command "$DB_USERNAME = '%DB_USERNAME%'; $DB_PASSWORD = '%DB_PASSWOR
 ## Swagger Ui link :
 
 ```html
-https://petstore.swagger.io/?url=https://raw.githubusercontent.com/komersa-app/komersa-app-back/main/docs/api.yaml
+https://petstore.swagger.io/?url=https://raw.githubusercontent.com/komersa-app/komersa-app-back/main/docs/api-docs.yaml
 ```
 
 ###### *© Komersa Inc*

@@ -22,7 +22,7 @@ public class CarService {
     private final PricesService pricesService;
     private final CarRepo carRepo;
 
-    public CarService(@Lazy PricesService pricesService, DetailsService detailsService, CarRepository carRepository, CarRepo carRepo) {
+    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, CarRepo carRepo) {
         this.pricesService = pricesService;
         this.detailsService = detailsService;
         this.carRepository = carRepository;
@@ -61,8 +61,7 @@ public class CarService {
         return true;
     }
 
-
-    public List<Car> findCarsByCriteria(Car criteriaCar) {
-        return carRepo.findByCriteria(criteriaCar);
+    public Page<Car> findByCriteria(Car criteriaCar, Pageable pageable) {
+        return carRepo.findByCriteria(criteriaCar, pageable);
     }
 }

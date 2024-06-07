@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static komersa.utils.TokenManager.verifyToken;
-
-
 @RestController
 @RequestMapping("/api/cars")
 public class CarController {
@@ -33,8 +30,7 @@ public class CarController {
     @ApiResponse(responseCode = "201", description = "Car saved successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Invalid foreign key that is not found")
-    public ResponseEntity<CarDtoResponse> createCar(@RequestHeader(required = false, value = "Authorization") String token, @Valid @RequestBody CarDtoRequest carDtoRequest) {
-        verifyToken(token);
+    public ResponseEntity<CarDtoResponse> createCar(@Valid @RequestBody CarDtoRequest carDtoRequest) {
         Car car = CarDtoMapper.toModel(carDtoRequest);
         car = carService.create(car);
         return new ResponseEntity<>(CarDtoMapper.toResponse(car), HttpStatus.CREATED);
@@ -53,8 +49,25 @@ public class CarController {
     @Operation(summary = "Get All Car", description = "Get All Car")
     @ApiResponse(responseCode = "200", description = "Car Get All successfully")
     @ApiResponse(responseCode = "404", description = "No records with Car have been found")
-    public ResponseEntity<Page<CarDtoResponse>> getAllCar(Pageable pageable) {
-        Page<Car> carPage = carService.getAll(pageable);
+    public ResponseEntity<Page<CarDtoResponse>> getAllCar(Pageable pageable,
+        @RequestParam(required = false, value = "name") String name,
+          @RequestParam(required = false, value = "description") String description,
+          @RequestParam(required = false, value = "color") String color,
+          @RequestParam(required = false, value = "motorType") String motorType,
+          @RequestParam(required = false, value = "power") String power,
+          @RequestParam(required = false, value = "status") String status,
+          @RequestParam(required = false, value = "type") String type
+    ) {
+        Page<Car> carPage = carService.findByCriteria(new Car(
+                name,
+                description,
+                color,
+                motorType,
+                power,
+                status,
+                type
+        ), pageable);
+        //Page<Car> carPage = carService.getAll(pageable);
         return new ResponseEntity<>(carPage.map(CarDtoMapper::toResponse), HttpStatus.OK);
     }
 
@@ -63,8 +76,7 @@ public class CarController {
     @ApiResponse(responseCode = "201", description = "Car updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Car with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<CarDtoResponse> updateCar(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody CarDtoRequest carDtoRequest) {
-        verifyToken(token);
+    public ResponseEntity<CarDtoResponse> updateCar(@PathVariable("id") Long id, @Valid @RequestBody CarDtoRequest carDtoRequest) {
         Car car = CarDtoMapper.toModel(carDtoRequest);
         car = carService.updateById(id, car);
         return new ResponseEntity<>(CarDtoMapper.toResponse(car), HttpStatus.CREATED);
@@ -73,26 +85,7 @@ public class CarController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an car", description = "Delete an car by id")
     @ApiResponse(responseCode = "204", description = "Car deleted successfully")
-    public ResponseEntity<Boolean> deleteCar(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id) {
-        verifyToken(token);
+    public ResponseEntity<Boolean> deleteCar(@PathVariable("id") Long id) {
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
-    }
-    @GetMapping("/search")
-    public List<Car> searchCars(@RequestParam(required = false) String name,
-                                @RequestParam(required = false) String description,
-                                @RequestParam(required = false) String color,
-                                @RequestParam(required = false) String motorType,
-                                @RequestParam(required = false) String power,
-                                @RequestParam(required = false) String status,
-                                @RequestParam(required = false) String type) {
-        Car criteriaCar = new Car();
-        criteriaCar.setName(name);
-        criteriaCar.setDescription(description);
-        criteriaCar.setColor(color);
-        criteriaCar.setMotorType(motorType);
-        criteriaCar.setPower(power);
-        criteriaCar.setStatus(status);
-        criteriaCar.setType(type);
-        return carService.findCarsByCriteria(criteriaCar);
     }
 }

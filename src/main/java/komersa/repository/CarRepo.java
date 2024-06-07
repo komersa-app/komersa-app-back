@@ -1,23 +1,28 @@
 package komersa.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import komersa.model.Car;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+@AllArgsConstructor
 @Repository
 public class CarRepo {
-    private final EntityManager entityManager;
+    private EntityManager entityManager;
 
-    public CarRepo(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    // Spring Data's Pageable parameter
+    // JPA Criteria API
 
-    public List<Car> findByCriteria(Car criteriaCar) {
+    public Page<Car> findByCriteria(Car criteriaCar, Pageable pageable) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> criteriaQuery = criteriaBuilder.createQuery(Car.class);
         Root<Car> root = criteriaQuery.from(Car.class);
@@ -48,6 +53,17 @@ public class CarRepo {
 
         criteriaQuery.where(predicate);
 
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        // Apply pagination
+        int startPosition = (int) pageable.getOffset();
+        int maxResults = pageable.getPageSize();
+
+        TypedQuery<Car> typedQuery = entityManager.createQuery(criteriaQuery);
+        typedQuery.setFirstResult(startPosition);
+        typedQuery.setMaxResults(maxResults);
+
+        List<Car> resultList = typedQuery.getResultList();
+
+        // Create a custom Page object
+        return new PageImpl<>(resultList, pageable, resultList.size());
     }
 }

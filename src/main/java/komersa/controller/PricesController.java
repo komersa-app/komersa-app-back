@@ -30,8 +30,7 @@ public class PricesController {
     @ApiResponse(responseCode = "201", description = "Prices saved successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Invalid foreign key that is not found")
-    public ResponseEntity<PricesDtoResponse> createPrices(@RequestHeader(required = false, value = "Authorization") String token, @Valid @RequestBody PricesDtoRequest pricesDtoRequest) {
-        verifyToken(token);
+    public ResponseEntity<PricesDtoResponse> createPrices(@Valid @RequestBody PricesDtoRequest pricesDtoRequest) {
         Prices prices = PricesDtoMapper.toModel(pricesDtoRequest);
         prices = pricesService.create(prices);
         return new ResponseEntity<>(PricesDtoMapper.toResponse(prices), HttpStatus.CREATED);
@@ -60,8 +59,7 @@ public class PricesController {
     @ApiResponse(responseCode = "201", description = "Prices updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Prices with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<PricesDtoResponse> updatePrices(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody PricesDtoRequest pricesDtoRequest) {
-        verifyToken(token);
+    public ResponseEntity<PricesDtoResponse> updatePrices(@PathVariable("id") Long id, @Valid @RequestBody PricesDtoRequest pricesDtoRequest) {
         Prices prices = PricesDtoMapper.toModel(pricesDtoRequest);
         prices = pricesService.updateById(id, prices);
         return new ResponseEntity<>(PricesDtoMapper.toResponse(prices), HttpStatus.CREATED);
@@ -70,8 +68,7 @@ public class PricesController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an prices", description = "Delete an prices by id")
     @ApiResponse(responseCode = "204", description = "Prices deleted successfully")
-    public ResponseEntity<Boolean> deletePrices(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id) {
-        verifyToken(token);
+    public ResponseEntity<Boolean> deletePrices(@PathVariable("id") Long id) {
         return new ResponseEntity<>(pricesService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }
