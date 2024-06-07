@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static komersa.utils.TokenManager.verifyToken;
+
 @RestController
 @RequestMapping("/api/details")
 public class DetailsController {
@@ -28,7 +30,8 @@ public class DetailsController {
     @ApiResponse(responseCode = "201", description = "Details saved successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Invalid foreign key that is not found")
-    public ResponseEntity<DetailsDtoResponse> createDetails(@Valid @RequestBody DetailsDtoRequest detailsDtoRequest) {
+    public ResponseEntity<DetailsDtoResponse> createDetails(@RequestHeader(required = false, value = "Authorization") String token, @Valid @RequestBody DetailsDtoRequest detailsDtoRequest) {
+        verifyToken(token);
         Details details = DetailsDtoMapper.toModel(detailsDtoRequest);
         details = detailsService.create(details);
         return new ResponseEntity<>(DetailsDtoMapper.toResponse(details), HttpStatus.CREATED);
@@ -57,7 +60,8 @@ public class DetailsController {
     @ApiResponse(responseCode = "201", description = "Details updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Details with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<DetailsDtoResponse> updateDetails(@PathVariable("id") Long id, @Valid @RequestBody DetailsDtoRequest detailsDtoRequest) {
+    public ResponseEntity<DetailsDtoResponse> updateDetails(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody DetailsDtoRequest detailsDtoRequest) {
+        verifyToken(token);
         Details details = DetailsDtoMapper.toModel(detailsDtoRequest);
         details = detailsService.updateById(id, details);
         return new ResponseEntity<>(DetailsDtoMapper.toResponse(details), HttpStatus.CREATED);
@@ -66,7 +70,8 @@ public class DetailsController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an details", description = "Delete an details by id")
     @ApiResponse(responseCode = "204", description = "Details deleted successfully")
-    public ResponseEntity<Boolean> deleteDetails(@PathVariable("id") Long id) {
+    public ResponseEntity<Boolean> deleteDetails(@RequestHeader("Authorization") String token, @PathVariable("id") Long id) {
+        verifyToken(token);
         return new ResponseEntity<>(detailsService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }

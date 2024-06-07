@@ -28,7 +28,6 @@ public class AppointmentService {
         appointment.setCar(carService.getById(appointment.getCar().getId()));
         appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
-        appointment.setAppointment(getById(appointment.getAppointment().getId()));
         return appointmentRepository.save(appointment);
     }
 
@@ -48,7 +47,6 @@ public class AppointmentService {
         appointment.setCar(carService.getById(appointment.getCar().getId()));
         appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
-        appointment.setAppointment(getById(appointment.getAppointment().getId()));
         log.info("Appointment update by id: {}", appointment);
         return appointmentRepository.save(appointment);
     }
