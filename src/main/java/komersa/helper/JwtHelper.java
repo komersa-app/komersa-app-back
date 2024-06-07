@@ -17,15 +17,16 @@ import java.util.Date;
 public class JwtHelper {
 
   private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-  private static final int MINUTES = 60;
+  //private static final int MINUTES = 60;
 
-  public static String generateToken(String email) {
+  public static String generateToken(String name) {
     var now = Instant.now();
     return Jwts.builder()
-        .subject(email)
-        .issuedAt(Date.from(now))
-        .expiration(Date.from(now.plus(MINUTES, ChronoUnit.MINUTES)))
+        .subject(name)
         .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+        .issuedAt(Date.from(now))
+        /*.expiration(Date.from(now.plus(MINUTES, ChronoUnit.MINUTES)))
+        */
         .compact();
   }
 

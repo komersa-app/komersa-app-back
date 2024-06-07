@@ -1,6 +1,10 @@
-Backend for Komersa App
---
+# Backend for Komersa App
 
+---
+
+## Required config:
+
+---
 - *Set the env vars:*
 
 ```shell
@@ -30,3 +34,12 @@ psql postgresql://${DB_USERNAME}:${DB_PASSWORD}@localhost:5432 -c "CREATE DATABA
 # Windows
 powershell -Command "$DB_USERNAME = '%DB_USERNAME%'; $DB_PASSWORD = '%DB_PASSWORD%'; $DB_NAME = '%DB_NAME%'; $connectionString = 'Host=localhost;Port=5432;Username=$DB_USERNAME;Password=$DB_PASSWORD;'; Invoke-Sqlcmd -ConnectionString $connectionString -Query 'CREATE DATABASE %DB_NAME%'"
 ```
+
+---
+## Swagger Ui link :
+
+```html
+https://petstore.swagger.io/?url=https://raw.githubusercontent.com/komersa-app/komersa-app-back/main/docs/api.yaml
+```
+
+###### *© Komersa Inc*

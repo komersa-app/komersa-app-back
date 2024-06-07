@@ -19,7 +19,6 @@ public class StaticAppointment {
         model.setCar(StaticCar.car1());
         model.setAdmin(StaticAdmin.admin1());
         model.setVisitor(StaticVisitor.visitor1());
-        model.setAppointment(StaticAppointment.appointment1());
         return model;
     }
 
@@ -32,7 +31,6 @@ public class StaticAppointment {
         model.setCar(StaticCar.car2());
         model.setAdmin(StaticAdmin.admin2());
         model.setVisitor(StaticVisitor.visitor2());
-        model.setAppointment(StaticAppointment.appointment2());
         return model;
     }
 
@@ -43,7 +41,6 @@ public class StaticAppointment {
         dtoRequest.setCarId(1L);
         dtoRequest.setAdminId(1L);
         dtoRequest.setVisitorId(1L);
-        dtoRequest.setAppointmentId(1L);
         return dtoRequest;
     }
 
@@ -56,7 +53,6 @@ public class StaticAppointment {
         dtoResponse.setCar(StaticCar.carDtoResponse1());
         dtoResponse.setAdmin(StaticAdmin.adminDtoResponse1());
         dtoResponse.setVisitor(StaticVisitor.visitorDtoResponse1());
-        dtoResponse.setAppointment(StaticAppointment.appointmentDtoResponse1());
         return dtoResponse;
     }
 
@@ -69,7 +65,6 @@ public class StaticAppointment {
         dtoResponse.setCar(StaticCar.carDtoResponse2());
         dtoResponse.setAdmin(StaticAdmin.adminDtoResponse2());
         dtoResponse.setVisitor(StaticVisitor.visitorDtoResponse2());
-        dtoResponse.setAppointment(StaticAppointment.appointmentDtoResponse1());
         return dtoResponse;
     }
 }

@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class AppointmentDtoRequest {
-
+    // visitor can get admin list without sensitive info
+    // update api & dto
     @NotNull(message = "Name cannot be null")
     @NotBlank(message = "Name cannot be blank")
     private String name;
@@ -32,8 +33,4 @@ public class AppointmentDtoRequest {
     @Positive(message = "Visitor must be a positive number")
     @NotNull(message = "Visitor cannot be null")
     private Long visitorId;
-
-    @Positive(message = "Appointment must be a positive number")
-    @NotNull(message = "Appointment cannot be null")
-    private Long appointmentId;
 }

@@ -31,6 +31,7 @@ public class SwaggerConfiguration {
         .title("Authentication Service Api Doc")
         .version("1.0.0")
         .description("HTTP APIs to manage user registration and authentication.")
-        .contact(new Contact().name("Mina Rashidi"));
+        .contact(new Contact().name("Komersa Inc"));
   }
+  // TODO: configure openapi yaml file generator
 }

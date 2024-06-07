@@ -11,6 +11,9 @@ public class PricesDtoMapper {
         Prices model = new Prices();
 
         model.setAmount(request.getAmount());
+
+        // TODO: Set all attributes with builder or constructor
+
         Car car = new Car();
         car.setId(request.getCarId());
         model.setCar(car);

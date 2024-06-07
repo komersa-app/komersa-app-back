@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static komersa.utils.TokenManager.verifyToken;
+
 @RestController
 @RequestMapping("/api/images")
 public class ImagesController {
@@ -28,7 +30,8 @@ public class ImagesController {
     @ApiResponse(responseCode = "201", description = "Images saved successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Invalid foreign key that is not found")
-    public ResponseEntity<ImagesDtoResponse> createImages(@Valid @RequestBody ImagesDtoRequest imagesDtoRequest) {
+    public ResponseEntity<ImagesDtoResponse> createImages(@RequestHeader(required = false, value = "Authorization") String token, @Valid @RequestBody ImagesDtoRequest imagesDtoRequest) {
+        verifyToken(token);
         Images images = ImagesDtoMapper.toModel(imagesDtoRequest);
         images = imagesService.create(images);
         return new ResponseEntity<>(ImagesDtoMapper.toResponse(images), HttpStatus.CREATED);
@@ -57,7 +60,8 @@ public class ImagesController {
     @ApiResponse(responseCode = "201", description = "Images updated successfully")
     @ApiResponse(responseCode = "400", description = "Invalid input")
     @ApiResponse(responseCode = "404", description = "Images with such an Id not found or invalid foreign key that is not found")
-    public ResponseEntity<ImagesDtoResponse> updateImages(@PathVariable("id") Long id, @Valid @RequestBody ImagesDtoRequest imagesDtoRequest) {
+    public ResponseEntity<ImagesDtoResponse> updateImages(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id, @Valid @RequestBody ImagesDtoRequest imagesDtoRequest) {
+        verifyToken(token);
         Images images = ImagesDtoMapper.toModel(imagesDtoRequest);
         images = imagesService.updateById(id, images);
         return new ResponseEntity<>(ImagesDtoMapper.toResponse(images), HttpStatus.CREATED);
@@ -66,7 +70,8 @@ public class ImagesController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete an images", description = "Delete an images by id")
     @ApiResponse(responseCode = "204", description = "Images deleted successfully")
-    public ResponseEntity<Boolean> deleteImages(@PathVariable("id") Long id) {
+    public ResponseEntity<Boolean> deleteImages(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id) {
+        verifyToken(token);
         return new ResponseEntity<>(imagesService.deleteById(id), HttpStatus.NO_CONTENT);
     }
 }
