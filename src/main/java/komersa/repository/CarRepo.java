@@ -6,13 +6,16 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import komersa.model.Car;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@AllArgsConstructor
+@Repository
 public class CarRepo {
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
+
+    public CarRepo(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     public List<Car> findByCriteria(Car criteriaCar) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
