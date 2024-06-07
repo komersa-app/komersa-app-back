@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/car")
 public class CarController {
@@ -68,5 +70,23 @@ public class CarController {
     @ApiResponse(responseCode = "204", description = "Car deleted successfully")
     public ResponseEntity<Boolean> deleteCar(@PathVariable("id") Long id) {
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/search")
+    public List<Car> searchCars(@RequestParam("name") String name,
+                                @RequestParam("description") String description,
+                                @RequestParam("color") String color,
+                                @RequestParam("motorType") String motorType,
+                                @RequestParam("power") String power,
+                                @RequestParam("status") String status,
+                                @RequestParam("type") String type) {
+        Car criteriaCar = new Car();
+        criteriaCar.setName(name);
+        criteriaCar.setDescription(description);
+        criteriaCar.setColor(color);
+        criteriaCar.setMotorType(motorType);
+        criteriaCar.setPower(power);
+        criteriaCar.setStatus(status);
+        criteriaCar.setType(type);
+        return carService.findCarsByCriteria(criteriaCar);
     }
 }

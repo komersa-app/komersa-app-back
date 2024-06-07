@@ -2,12 +2,17 @@ package komersa.service;
 
 import komersa.exception.EntityNotFoundException;
 import komersa.model.Car;
+import komersa.repository.CarRepo;
 import komersa.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -15,11 +20,13 @@ public class CarService {
     private final CarRepository carRepository;
     private final DetailsService detailsService;
     private final PricesService pricesService;
+    private final CarRepo carRepo;
 
-    public CarService(@Lazy PricesService pricesService, DetailsService detailsService, CarRepository carRepository) {
+    public CarService(@Lazy PricesService pricesService, DetailsService detailsService, CarRepository carRepository, CarRepo carRepo) {
         this.pricesService = pricesService;
         this.detailsService = detailsService;
         this.carRepository = carRepository;
+        this.carRepo = carRepo;
     }
 
     public Car create(Car car) {
@@ -52,5 +59,10 @@ public class CarService {
         log.info("Car delete by id: {}", id);
         carRepository.deleteById(id);
         return true;
+    }
+
+
+    public List<Car> findCarsByCriteria(Car criteriaCar) {
+        return carRepo.findByCriteria(criteriaCar);
     }
 }
