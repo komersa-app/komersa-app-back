@@ -14,7 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static komersa.utils.TokenManager.verifyToken;
+
 
 @RestController
 @RequestMapping("/api/cars")
@@ -73,5 +76,23 @@ public class CarController {
     public ResponseEntity<Boolean> deleteCar(@RequestHeader(required = false, value = "Authorization") String token, @PathVariable("id") Long id) {
         verifyToken(token);
         return new ResponseEntity<>(carService.deleteById(id), HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/search")
+    public List<Car> searchCars(@RequestParam(required = false) String name,
+                                @RequestParam(required = false) String description,
+                                @RequestParam(required = false) String color,
+                                @RequestParam(required = false) String motorType,
+                                @RequestParam(required = false) String power,
+                                @RequestParam(required = false) String status,
+                                @RequestParam(required = false) String type) {
+        Car criteriaCar = new Car();
+        criteriaCar.setName(name);
+        criteriaCar.setDescription(description);
+        criteriaCar.setColor(color);
+        criteriaCar.setMotorType(motorType);
+        criteriaCar.setPower(power);
+        criteriaCar.setStatus(status);
+        criteriaCar.setType(type);
+        return carService.findCarsByCriteria(criteriaCar);
     }
 }
