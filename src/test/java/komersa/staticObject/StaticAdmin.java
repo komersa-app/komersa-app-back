@@ -32,14 +32,12 @@ public class StaticAdmin {
     public static AdminDtoResponse adminDtoResponse1() {
         AdminDtoResponse dtoResponse = new AdminDtoResponse();
         dtoResponse.setId(ID);
-        dtoResponse.setPassword("password");
         return dtoResponse;
     }
 
     public static AdminDtoResponse adminDtoResponse2() {
         AdminDtoResponse dtoResponse = new AdminDtoResponse();
         dtoResponse.setId(ID);
-        dtoResponse.setPassword("password");
         return dtoResponse;
     }
 }

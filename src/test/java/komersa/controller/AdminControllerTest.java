@@ -60,8 +60,7 @@ class AdminControllerTest {
                         .content(objectMapper.writeValueAsString(adminRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(adminResponse.getId()))
-                .andExpect(jsonPath("$.password").value(adminResponse.getPassword()));
+                .andExpect(jsonPath("$.id").value(adminResponse.getId()));
     }
 
     @Test
@@ -104,8 +103,7 @@ class AdminControllerTest {
         mockMvc.perform(get("/api/admin/{id}", StaticAdmin.ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(adminResponse.getId()))
-                .andExpect(jsonPath("$.password").value(adminResponse.getPassword()));
+                .andExpect(jsonPath("$.id").value(adminResponse.getId()));
     }
 
     @Test
@@ -162,8 +160,7 @@ class AdminControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(adminRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(adminResponse.getId()))
-                .andExpect(jsonPath("$.password").value(adminResponse.getPassword()));
+                .andExpect(jsonPath("$.id").value(adminResponse.getId()));
     }
 
     @Test

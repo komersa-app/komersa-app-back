@@ -36,4 +36,6 @@ public class SwaggerConfiguration {
         .contact(new Contact().name("Komersa Inc"));
   }
   // TODO: configure openapi yaml file generator
+  // link : ui - http://localhost:8080/swagger-ui/index.html
+  //        specs - /v3/api-docs
 }

@@ -19,7 +19,6 @@ public class AdminDtoMapper {
     public static AdminDtoResponse toResponse(Admin model) {
         AdminDtoResponse response = new AdminDtoResponse();
         response.setId(model.getId());
-        response.setPassword(model.getPassword());
         response.setEmail(model.getEmail());
         response.setName(model.getName());
 
