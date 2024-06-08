@@ -1,10 +1,7 @@
 openapi: 3.0.1
 info:
-  title: Komersa Api Doc
-  description: HTTP APIs for managing e-commerce resources
-  contact:
-    name: Komersa Inc
-  version: 1.0.0
+  title: OpenAPI definition
+  version: v0
 servers:
 - url: http://localhost:8080
   description: Generated server url
@@ -944,12 +941,12 @@ paths:
               $ref: '#/components/schemas/LoginDtoRequest'
         required: true
       responses:
-        "404":
-          description: Not Found
+        "200":
+          description: OK
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
+                $ref: '#/components/schemas/LoginDtoResponse'
         "401":
           description: Unauthorized
           content:
@@ -962,12 +959,12 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-        "200":
-          description: OK
+        "404":
+          description: Not Found
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/LoginDtoResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
   /api/appointments:
     get:
       tags:
@@ -1095,12 +1092,6 @@ paths:
         schema:
           type: string
       responses:
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
         "200":
           description: OK
           content:
@@ -1109,6 +1100,12 @@ paths:
                 $ref: '#/components/schemas/LoginDtoResponse'
         "403":
           description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "500":
+          description: Internal Server Error
           content:
             '*/*':
               schema:
@@ -1294,8 +1291,6 @@ components:
           type: string
         email:
           type: string
-        password:
-          type: string
     AppointmentDtoResponse:
       type: object
       properties:
@@ -1344,6 +1339,15 @@ components:
           type: string
           description: password
           example: "123456"
+    LoginDtoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+        token:
+          type: string
+          description: JWT token
     ApiErrorResponse:
       type: object
       properties:
@@ -1354,15 +1358,6 @@ components:
         description:
           type: string
           description: Error description
-    LoginDtoResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          description: name
-        token:
-          type: string
-          description: JWT token
     Pageable:
       type: object
       properties:
@@ -1649,8 +1644,3 @@ components:
           format: int32
         empty:
           type: boolean
-  securitySchemes:
-    Bearer Authentication:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
