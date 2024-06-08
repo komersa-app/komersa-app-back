@@ -1172,40 +1172,6 @@ components:
         carId:
           type: integer
           format: int64
-    CarDtoResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        description:
-          type: string
-        color:
-          type: string
-        motorType:
-          type: string
-        power:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-        details:
-          $ref: '#/components/schemas/DetailsDtoResponse'
-        price:
-          $ref: '#/components/schemas/PricesDtoResponse'
-    DetailsDtoResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        brand:
-          type: string
-        model:
-          type: string
     ImagesDtoResponse:
       type: object
       properties:
@@ -1214,14 +1180,22 @@ components:
           format: int64
         url:
           type: string
-        car:
-          $ref: '#/components/schemas/CarDtoResponse'
     DetailsDtoRequest:
       required:
       - brand
       - model
       type: object
       properties:
+        brand:
+          type: string
+        model:
+          type: string
+    DetailsDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
         brand:
           type: string
         model:
@@ -1259,6 +1233,34 @@ components:
         priceId:
           type: integer
           format: int64
+    CarDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        motorType:
+          type: string
+        power:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        details:
+          $ref: '#/components/schemas/DetailsDtoResponse'
+        price:
+          $ref: '#/components/schemas/PricesDtoResponse'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImagesDtoResponse'
     AppointmentDtoRequest:
       required:
       - adminId

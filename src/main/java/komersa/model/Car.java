@@ -35,6 +35,7 @@ public class Car{
 
     @OneToMany(mappedBy = "car")
     private List<Images> images;
+
     @OneToMany(mappedBy = "car")
     private List<Appointment> appointments;
 

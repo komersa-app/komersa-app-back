@@ -6,9 +6,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,9 +28,12 @@ public class Appointment {
     private String status;
 
     @ManyToOne
+    @ToString.Exclude
     private Car car;
     @ManyToOne
+    @ToString.Exclude
     private Admin admin;
     @ManyToOne
+    @ToString.Exclude
     private Visitor visitor;
 }

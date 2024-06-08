@@ -21,5 +21,6 @@ public class Details {
     private String model;
 
     @OneToMany(mappedBy = "details")
+    @ToString.Exclude
     private List<Car> cars;
 }

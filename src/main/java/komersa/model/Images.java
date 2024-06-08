@@ -17,5 +17,6 @@ public class Images {
     private String url;
 
     @ManyToOne
+    @ToString.Exclude
     private Car car;
 }

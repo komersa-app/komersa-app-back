@@ -1,5 +1,6 @@
 package komersa.dto.mapper;
 
+import komersa.dto.response.CarDtoResponse;
 import komersa.model.Car;
 import komersa.model.Images;
 import komersa.dto.request.ImagesDtoRequest;
@@ -23,7 +24,6 @@ public class ImagesDtoMapper {
 
         response.setId(model.getId());
         response.setUrl(model.getUrl());
-        response.setCar(CarDtoMapper.toResponse(model.getCar()));
 
         return response;
     }

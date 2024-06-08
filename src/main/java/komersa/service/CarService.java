@@ -20,12 +20,14 @@ public class CarService {
     private final CarRepository carRepository;
     private final DetailsService detailsService;
     private final PricesService pricesService;
+    private final ImagesService imagesService;
     private final CarRepo carRepo;
 
-    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, CarRepo carRepo) {
+    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, ImagesService imagesService, CarRepo carRepo) {
         this.pricesService = pricesService;
         this.detailsService = detailsService;
         this.carRepository = carRepository;
+        this.imagesService = imagesService;
         this.carRepo = carRepo;
     }
 
@@ -43,7 +45,9 @@ public class CarService {
 
     public Page<Car> getAll(Pageable pageable) {
         log.info("Car get all: {}", pageable);
-        return carRepository.findAll(pageable);
+        Page<Car> cars = carRepository.findAll(pageable);
+        cars.forEach(e -> e.setImages(imagesService.findByCarId(e.getId())));
+        return cars;
     }
 
     public Car updateById(Long id, Car car) {

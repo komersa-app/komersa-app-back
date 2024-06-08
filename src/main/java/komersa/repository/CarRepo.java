@@ -7,6 +7,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import komersa.model.Car;
+import komersa.service.ImagesService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,6 +19,7 @@ import java.util.List;
 @Repository
 public class CarRepo {
     private EntityManager entityManager;
+    private ImagesService imagesService;
 
     // Spring Data's Pageable parameter
     // JPA Criteria API
@@ -53,7 +55,7 @@ public class CarRepo {
 
         criteriaQuery.where(predicate);
 
-        // Apply pagination
+            // Apply pagination
         int startPosition = (int) pageable.getOffset();
         int maxResults = pageable.getPageSize();
 
@@ -62,6 +64,7 @@ public class CarRepo {
         typedQuery.setMaxResults(maxResults);
 
         List<Car> resultList = typedQuery.getResultList();
+        resultList.forEach(car -> car.setImages(imagesService.findByCarId(car.getId())));
 
         // Create a custom Page object
         return new PageImpl<>(resultList, pageable, resultList.size());
