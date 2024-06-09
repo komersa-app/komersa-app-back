@@ -30,12 +30,14 @@ public class Appointment {
     @ManyToOne
     @ToString.Exclude
     private Car car;
+
     /*
     @ManyToOne
     @ToString.Exclude
     private Admin admin;
 
      */
+
     @ManyToOne
     @ToString.Exclude
     private Visitor visitor;

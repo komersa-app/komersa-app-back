@@ -18,25 +18,23 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Admin extends User implements UserDetails {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
-    private Long id;
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "admin")
-    private List<Appointment> appointments;
-
-    public Admin(Long id, String name, String email, Long id1, String password, List<Appointment> appointments) {
+    public Admin(Long id, String name, String email, String password) {
         super(id, name, email);
-        this.id = id1;
         this.password = password;
-        this.appointments = appointments;
     }
+
     public Admin(String name) {
         super(null, name, null);
     }
+    /*
+    public Admin(String email) {
+        super(null, null, email);
+    }
+
+     */
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

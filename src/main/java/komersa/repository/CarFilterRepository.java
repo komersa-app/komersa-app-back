@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @AllArgsConstructor
 @Repository
-public class CarRepo {
+public class CarFilterRepository {
     private EntityManager entityManager;
     private ImagesService imagesService;
 

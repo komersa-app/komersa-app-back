@@ -13,12 +13,10 @@ import org.springframework.stereotype.Service;
 public class AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final CarService carService;
-    private final AdminService adminService;
     private final VisitorService visitorService;
 
-    public AppointmentService(AdminService adminService, VisitorService visitorService, CarService carService, AppointmentRepository appointmentRepository) {
+    public AppointmentService(VisitorService visitorService, CarService carService, AppointmentRepository appointmentRepository) {
         this.visitorService = visitorService;
-        this.adminService = adminService;
         this.carService = carService;
         this.appointmentRepository = appointmentRepository;
     }
@@ -26,7 +24,6 @@ public class AppointmentService {
     public Appointment create(Appointment appointment) {
         log.info("Appointment create: {}", appointment);
         appointment.setCar(carService.getById(appointment.getCar().getId()));
-        appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
         return appointmentRepository.save(appointment);
     }
@@ -45,7 +42,6 @@ public class AppointmentService {
         getById(id);
         appointment.setId(id);
         appointment.setCar(carService.getById(appointment.getCar().getId()));
-        appointment.setAdmin(adminService.getById(appointment.getAdmin().getId()));
         appointment.setVisitor(visitorService.getById(appointment.getVisitor().getId()));
         log.info("Appointment update by id: {}", appointment);
         return appointmentRepository.save(appointment);

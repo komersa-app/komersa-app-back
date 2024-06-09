@@ -37,6 +37,7 @@ public class Car{
     private List<Images> images;
 
     @OneToMany(mappedBy = "car")
+    @ToString.Exclude
     private List<Appointment> appointments;
 
     @ManyToOne
