@@ -12,7 +12,7 @@ import java.util.List;
 @DiscriminatorValue("visitor")
 @Data
 @Entity(name = "visitor")
-public class Visitor extends User{
+public class Visitor extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")

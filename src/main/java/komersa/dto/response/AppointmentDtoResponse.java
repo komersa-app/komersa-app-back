@@ -22,8 +22,10 @@ public class AppointmentDtoResponse {
     private String status;
 
     private CarDtoResponse car;
-
+/*
     private AdminDtoResponse admin;
+
+ */
 
     private VisitorDtoResponse visitor;
 }

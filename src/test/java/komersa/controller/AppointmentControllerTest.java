@@ -67,7 +67,6 @@ class AppointmentControllerTest {
                 .andExpect(jsonPath("$.datetime").value(appointmentResponse.getDatetime().format(formatter)))
                 .andExpect(jsonPath("$.status").value(appointmentResponse.getStatus()))
                 .andExpect(jsonPath("$.car.id").value(appointmentResponse.getCar().getId()))
-                .andExpect(jsonPath("$.admin.id").value(appointmentResponse.getAdmin().getId()))
                 .andExpect(jsonPath("$.visitor.id").value(appointmentResponse.getVisitor().getId()));
     }
 
@@ -116,7 +115,6 @@ class AppointmentControllerTest {
                 .andExpect(jsonPath("$.datetime").value(appointmentResponse.getDatetime().format(formatter)))
                 .andExpect(jsonPath("$.status").value(appointmentResponse.getStatus()))
                 .andExpect(jsonPath("$.car.id").value(appointmentResponse.getCar().getId()))
-                .andExpect(jsonPath("$.admin.id").value(appointmentResponse.getAdmin().getId()))
                 .andExpect(jsonPath("$.visitor.id").value(appointmentResponse.getVisitor().getId()));
     }
 
@@ -179,7 +177,6 @@ class AppointmentControllerTest {
                 .andExpect(jsonPath("$.datetime").value(appointmentResponse.getDatetime().format(formatter)))
                 .andExpect(jsonPath("$.status").value(appointmentResponse.getStatus()))
                 .andExpect(jsonPath("$.car.id").value(appointmentResponse.getCar().getId()))
-                .andExpect(jsonPath("$.admin.id").value(appointmentResponse.getAdmin().getId()))
                 .andExpect(jsonPath("$.visitor.id").value(appointmentResponse.getVisitor().getId()));
     }
 

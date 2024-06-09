@@ -25,14 +25,17 @@ public class Appointment {
     @Column(name = "datetime")
     private LocalDateTime datetime;
     @Column(name = "status")
-    private String status;
+    private String status; // pending, validated, rejected, archived
 
     @ManyToOne
     @ToString.Exclude
     private Car car;
+    /*
     @ManyToOne
     @ToString.Exclude
     private Admin admin;
+
+     */
     @ManyToOne
     @ToString.Exclude
     private Visitor visitor;
