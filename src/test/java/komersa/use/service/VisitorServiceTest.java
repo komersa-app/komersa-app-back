@@ -23,8 +23,7 @@ public class VisitorServiceTest {
 
     private static VisitorDtoRequest doe = new VisitorDtoRequest(
             "doe",
-            "doe@gmail.com",
-            "Just do it"
+            "doe@gmail.com"
     );
 
     @Test
@@ -36,8 +35,7 @@ public class VisitorServiceTest {
         for (int i = 0; i < 50; i++) {
             assertNotNull(visitorService.create(VisitorDtoMapper.toModel(new VisitorDtoRequest(
                     doe.getName() + i,
-                    doe.getEmail() + i,
-                    doe.getMessage() + i
+                    doe.getEmail() + i
             ))));
         }
     }

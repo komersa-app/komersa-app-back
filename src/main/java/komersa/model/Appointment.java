@@ -26,6 +26,8 @@ public class Appointment {
     private LocalDateTime datetime;
     @Column(name = "status")
     private String status; // pending, validated, rejected, archived
+    @Column(name = "message")
+    private String message;
 
     @ManyToOne
     @ToString.Exclude
