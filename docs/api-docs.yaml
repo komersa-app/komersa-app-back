@@ -6,7 +6,7 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
-  /api/visitor/{id}:
+  /api/visitors/{id}:
     get:
       tags:
       - visitor-controller
@@ -608,7 +608,7 @@ paths:
             '*/*':
               schema:
                 type: boolean
-  /api/visitor:
+  /api/visitors:
     get:
       tags:
       - visitor-controller
@@ -621,6 +621,16 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/Pageable'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         "404":
           description: No records with Visitor have been found
@@ -941,6 +951,12 @@ paths:
               $ref: '#/components/schemas/LoginDtoRequest'
         required: true
       responses:
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         "200":
           description: OK
           content:
@@ -955,12 +971,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
         "500":
           description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        "404":
-          description: Not Found
           content:
             '*/*':
               schema:
@@ -1115,15 +1125,12 @@ components:
     VisitorDtoRequest:
       required:
       - email
-      - message
       - name
       type: object
       properties:
         name:
           type: string
         email:
-          type: string
-        message:
           type: string
     VisitorDtoResponse:
       type: object
@@ -1134,8 +1141,6 @@ components:
         name:
           type: string
         email:
-          type: string
-        message:
           type: string
     PricesDtoRequest:
       required:
@@ -1263,8 +1268,8 @@ components:
             $ref: '#/components/schemas/ImagesDtoResponse'
     AppointmentDtoRequest:
       required:
-      - adminId
       - carId
+      - message
       - name
       - status
       - visitorId
@@ -1277,22 +1282,11 @@ components:
         carId:
           type: integer
           format: int64
-        adminId:
-          type: integer
-          format: int64
+        message:
+          type: string
         visitorId:
           type: integer
           format: int64
-    AdminDtoResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        email:
-          type: string
     AppointmentDtoResponse:
       type: object
       properties:
@@ -1306,10 +1300,10 @@ components:
           format: date-time
         status:
           type: string
+        message:
+          type: string
         car:
           $ref: '#/components/schemas/CarDtoResponse'
-        admin:
-          $ref: '#/components/schemas/AdminDtoResponse'
         visitor:
           $ref: '#/components/schemas/VisitorDtoResponse'
     AdminDtoRequest:
@@ -1324,6 +1318,16 @@ components:
         email:
           type: string
         password:
+          type: string
+    AdminDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
           type: string
     LoginDtoRequest:
       required:
@@ -1341,15 +1345,6 @@ components:
           type: string
           description: password
           example: "123456"
-    LoginDtoResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          description: name
-        token:
-          type: string
-          description: JWT token
     ApiErrorResponse:
       type: object
       properties:
@@ -1360,6 +1355,15 @@ components:
         description:
           type: string
           description: Error description
+    LoginDtoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+        token:
+          type: string
+          description: JWT token
     Pageable:
       type: object
       properties:

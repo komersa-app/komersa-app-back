@@ -12,15 +12,11 @@ import java.util.List;
 @Data
 @Entity(name = "visitor")
 public class Visitor extends User {
-    @Column(name = "message")
-    private String message;
-
     @OneToMany(mappedBy = "visitor")
     private List<Appointment> appointments;
 
-    public Visitor(Long id, String name, String email, String message, List<Appointment> appointments) {
+    public Visitor(Long id, String name, String email, List<Appointment> appointments) {
         super(id, name, email);
-        this.message = message;
         this.appointments = appointments;
     }
 
