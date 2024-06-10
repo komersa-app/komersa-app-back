@@ -1,0 +1,1 @@
+drop database if exists komersa_db; create database komersa_db;
