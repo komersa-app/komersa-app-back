@@ -6,7 +6,7 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
-  /api/visitor/{id}:
+  /api/visitors/{id}:
     get:
       tags:
       - visitor-controller
@@ -608,7 +608,7 @@ paths:
             '*/*':
               schema:
                 type: boolean
-  /api/visitor:
+  /api/visitors:
     get:
       tags:
       - visitor-controller
@@ -621,6 +621,16 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/Pageable'
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         "404":
           description: No records with Visitor have been found
@@ -1092,18 +1102,18 @@ paths:
         schema:
           type: string
       responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/LoginDtoResponse'
         "403":
           description: Forbidden
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
         "500":
           description: Internal Server Error
           content:
@@ -1263,7 +1273,6 @@ components:
             $ref: '#/components/schemas/ImagesDtoResponse'
     AppointmentDtoRequest:
       required:
-      - adminId
       - carId
       - name
       - status
@@ -1277,22 +1286,9 @@ components:
         carId:
           type: integer
           format: int64
-        adminId:
-          type: integer
-          format: int64
         visitorId:
           type: integer
           format: int64
-    AdminDtoResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        email:
-          type: string
     AppointmentDtoResponse:
       type: object
       properties:
@@ -1308,8 +1304,6 @@ components:
           type: string
         car:
           $ref: '#/components/schemas/CarDtoResponse'
-        admin:
-          $ref: '#/components/schemas/AdminDtoResponse'
         visitor:
           $ref: '#/components/schemas/VisitorDtoResponse'
     AdminDtoRequest:
@@ -1324,6 +1318,16 @@ components:
         email:
           type: string
         password:
+          type: string
+    AdminDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
           type: string
     LoginDtoRequest:
       required:
@@ -1418,9 +1422,9 @@ components:
         pageSize:
           type: integer
           format: int32
-        paged:
-          type: boolean
         unpaged:
+          type: boolean
+        paged:
           type: boolean
         offset:
           type: integer
