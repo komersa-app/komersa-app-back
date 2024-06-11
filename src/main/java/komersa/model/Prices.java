@@ -20,5 +20,6 @@ public class Prices {
     private LocalDateTime changeDatetime;
 
     @OneToOne(mappedBy = "price")
+    @ToString.Exclude
     private Car car;
 }

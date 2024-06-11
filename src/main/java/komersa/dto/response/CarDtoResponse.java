@@ -4,6 +4,8 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +31,6 @@ public class CarDtoResponse {
     private DetailsDtoResponse details;
 
     private PricesDtoResponse price;
+
+    private List<ImagesDtoResponse> images;
 }

@@ -60,8 +60,7 @@ class VisitorControllerTest {
                         .content(objectMapper.writeValueAsString(visitorRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(visitorResponse.getId()))
-                .andExpect(jsonPath("$.message").value(visitorResponse.getMessage()));
+                .andExpect(jsonPath("$.id").value(visitorResponse.getId()));
     }
 
     @Test
@@ -104,8 +103,7 @@ class VisitorControllerTest {
         mockMvc.perform(get("/api/visitor/{id}", StaticVisitor.ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(visitorResponse.getId()))
-                .andExpect(jsonPath("$.message").value(visitorResponse.getMessage()));
+                .andExpect(jsonPath("$.id").value(visitorResponse.getId()));
     }
 
     @Test
@@ -162,8 +160,7 @@ class VisitorControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(visitorRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(visitorResponse.getId()))
-                .andExpect(jsonPath("$.message").value(visitorResponse.getMessage()));
+                .andExpect(jsonPath("$.id").value(visitorResponse.getId()));
     }
 
     @Test

@@ -36,7 +36,6 @@ public class StaticImages {
         ImagesDtoResponse dtoResponse = new ImagesDtoResponse();
         dtoResponse.setId(ID);
         dtoResponse.setUrl("url");
-        dtoResponse.setCar(StaticCar.carDtoResponse1());
         return dtoResponse;
     }
 
@@ -44,7 +43,6 @@ public class StaticImages {
         ImagesDtoResponse dtoResponse = new ImagesDtoResponse();
         dtoResponse.setId(ID);
         dtoResponse.setUrl("url");
-        dtoResponse.setCar(StaticCar.carDtoResponse1());
         return dtoResponse;
     }
 }

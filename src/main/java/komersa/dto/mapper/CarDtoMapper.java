@@ -41,6 +41,7 @@ public class CarDtoMapper {
         response.setType(model.getType());
         response.setDetails(DetailsDtoMapper.toResponse(model.getDetails()));
         response.setPrice(PricesDtoMapper.toResponse(model.getPrice()));
+        response.setImages(model.getImages().stream().map(ImagesDtoMapper::toResponse).toList());
 
         return response;
     }

@@ -20,10 +20,13 @@ public class AppointmentDtoResponse {
     private LocalDateTime datetime;
 
     private String status;
+    private String message;
 
     private CarDtoResponse car;
-
+/*
     private AdminDtoResponse admin;
+
+ */
 
     private VisitorDtoResponse visitor;
 }

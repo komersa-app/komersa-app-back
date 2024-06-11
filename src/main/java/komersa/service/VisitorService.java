@@ -2,19 +2,24 @@ package komersa.service;
 
 import komersa.exception.EntityNotFoundException;
 import komersa.model.Visitor;
+import komersa.repository.VisitorFilterRepository;
 import komersa.repository.VisitorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class VisitorService {
     private final VisitorRepository visitorRepository;
+    private final VisitorFilterRepository visitorFilterRepository;
 
-    public VisitorService(VisitorRepository visitorRepository) {
+    public VisitorService(VisitorRepository visitorRepository, VisitorFilterRepository visitorFilterRepository) {
         this.visitorRepository = visitorRepository;
+        this.visitorFilterRepository = visitorFilterRepository;
     }
 
     public Visitor create(Visitor visitor) {
@@ -45,5 +50,9 @@ public class VisitorService {
         log.info("Visitor delete by id: {}", id);
         visitorRepository.deleteById(id);
         return true;
+    }
+
+    public Page<Visitor> findByCriteria(Visitor criteria, Pageable pageable) {
+        return visitorFilterRepository.findByCriteria(criteria, pageable);
     }
 }

@@ -61,8 +61,7 @@ class ImagesControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(imagesResponse.getId()))
-                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()))
-                .andExpect(jsonPath("$.car.id").value(imagesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()));
     }
 
     @Test
@@ -106,8 +105,7 @@ class ImagesControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(imagesResponse.getId()))
-                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()))
-                .andExpect(jsonPath("$.car.id").value(imagesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()));
     }
 
     @Test
@@ -165,8 +163,7 @@ class ImagesControllerTest {
                         .content(objectMapper.writeValueAsString(imagesRequest)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(imagesResponse.getId()))
-                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()))
-                .andExpect(jsonPath("$.car.id").value(imagesResponse.getCar().getId()));
+                .andExpect(jsonPath("$.url").value(imagesResponse.getUrl()));
     }
 
     @Test

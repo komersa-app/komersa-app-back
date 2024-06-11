@@ -13,6 +13,4 @@ public class ImagesDtoResponse {
     private Long id;
 
     private String url;
-
-    private CarDtoResponse car;
 }

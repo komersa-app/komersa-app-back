@@ -2,17 +2,12 @@ package komersa.service;
 
 import komersa.exception.EntityNotFoundException;
 import komersa.model.Car;
-import komersa.repository.CarRepo;
+import komersa.repository.CarFilterRepository;
 import komersa.repository.CarRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
@@ -20,13 +15,15 @@ public class CarService {
     private final CarRepository carRepository;
     private final DetailsService detailsService;
     private final PricesService pricesService;
-    private final CarRepo carRepo;
+    private final ImagesService imagesService;
+    private final CarFilterRepository carFilterRepository;
 
-    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, CarRepo carRepo) {
+    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, ImagesService imagesService, CarFilterRepository carFilterRepository) {
         this.pricesService = pricesService;
         this.detailsService = detailsService;
         this.carRepository = carRepository;
-        this.carRepo = carRepo;
+        this.imagesService = imagesService;
+        this.carFilterRepository = carFilterRepository;
     }
 
     public Car create(Car car) {
@@ -43,7 +40,9 @@ public class CarService {
 
     public Page<Car> getAll(Pageable pageable) {
         log.info("Car get all: {}", pageable);
-        return carRepository.findAll(pageable);
+        Page<Car> cars = carRepository.findAll(pageable);
+        cars.forEach(e -> e.setImages(imagesService.findByCarId(e.getId())));
+        return cars;
     }
 
     public Car updateById(Long id, Car car) {
@@ -62,6 +61,6 @@ public class CarService {
     }
 
     public Page<Car> findByCriteria(Car criteriaCar, Pageable pageable) {
-        return carRepo.findByCriteria(criteriaCar, pageable);
+        return carFilterRepository.findByCriteria(criteriaCar, pageable);
     }
 }

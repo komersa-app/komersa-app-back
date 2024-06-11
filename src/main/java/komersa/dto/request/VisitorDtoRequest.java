@@ -11,12 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class VisitorDtoRequest extends UserDtoRequest {
-    @NotNull(message = "Message cannot be null")
-    @NotBlank(message = "Message cannot be blank")
-    private String message;
-
-    public VisitorDtoRequest(String name, String email, String message) {
+        public VisitorDtoRequest(String name, String email) {
         super(name, email);
-        this.message = message;
     }
 }

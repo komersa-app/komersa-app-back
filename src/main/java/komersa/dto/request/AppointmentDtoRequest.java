@@ -26,9 +26,15 @@ public class AppointmentDtoRequest {
     @NotNull(message = "Car cannot be null")
     private Long carId;
 
+    /*
     @Positive(message = "Admin must be a positive number")
     @NotNull(message = "Admin cannot be null")
     private Long adminId;
+
+     */
+    @NotNull(message = "Status cannot be null")
+    @NotBlank(message = "Status cannot be blank")
+    private String message;
 
     @Positive(message = "Visitor must be a positive number")
     @NotNull(message = "Visitor cannot be null")

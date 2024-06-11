@@ -15,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/visitor")
+@RequestMapping("/api/visitors")
 public class VisitorController {
     private final VisitorService visitorService;
 
@@ -47,8 +47,15 @@ public class VisitorController {
     @Operation(summary = "Get All Visitor", description = "Get All Visitor")
     @ApiResponse(responseCode = "200", description = "Visitor Get All successfully")
     @ApiResponse(responseCode = "404", description = "No records with Visitor have been found")
-    public ResponseEntity<Page<VisitorDtoResponse>> getAllVisitor(Pageable pageable) {
-        Page<Visitor> visitorPage = visitorService.getAll(pageable);
+    public ResponseEntity<Page<VisitorDtoResponse>> getAllVisitor(Pageable pageable,
+        @RequestParam(required = false, value = "name") String name,
+        @RequestParam(required = false, value = "email") String email
+    ) {
+        Page<Visitor> visitorPage = visitorService.findByCriteria(new Visitor(
+                name,
+                email
+        ), pageable);
+
         return new ResponseEntity<>(visitorPage.map(VisitorDtoMapper::toResponse), HttpStatus.OK);
     }
 

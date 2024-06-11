@@ -6,9 +6,10 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,12 +25,22 @@ public class Appointment {
     @Column(name = "datetime")
     private LocalDateTime datetime;
     @Column(name = "status")
-    private String status;
+    private String status; // pending, validated, rejected, archived
+    @Column(name = "message")
+    private String message;
 
     @ManyToOne
+    @ToString.Exclude
     private Car car;
+
+    /*
     @ManyToOne
+    @ToString.Exclude
     private Admin admin;
+
+     */
+
     @ManyToOne
+    @ToString.Exclude
     private Visitor visitor;
 }
