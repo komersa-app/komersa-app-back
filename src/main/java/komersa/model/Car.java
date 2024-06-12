@@ -32,6 +32,8 @@ public class Car{
     private String status;
     @Column(name = "type")
     private String type;
+    @Column(name = "model")
+    private String model;
 
     @OneToMany(mappedBy = "car")
     private List<Images> images;
@@ -41,12 +43,12 @@ public class Car{
     private List<Appointment> appointments;
 
     @ManyToOne
-    private Details details;
+    private Brand brand;
 
     @OneToOne
     private Prices price;
 
-    public Car(String name, String description, String color, String motorType, String power, String status, String type) {
+    public  Car(String name, String description, String color, String motorType, String power, String status, String type, String brand, String model) {
         this.name = name;
         this.description = description;
         this.color = color;
@@ -54,15 +56,7 @@ public class Car{
         this.power = power;
         this.status = status;
         this.type = type;
-    }
-    public Car(String name, String description, String color, String motorType, String power, String status, String type, String brand, String model) {
-        this.name = name;
-        this.description = description;
-        this.color = color;
-        this.motorType = motorType;
-        this.power = power;
-        this.status = status;
-        this.type = type;
-        this.details = new Details(brand, model);
+        this.model = model;
+        this.brand = new Brand(brand);
     }
 }

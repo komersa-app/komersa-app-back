@@ -52,11 +52,11 @@ public class CarFilterRepository {
         if (criteriaCar.getType() != null) {
             predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("type"), criteriaCar.getType()));
         }
-        if (criteriaCar.getDetails().getModel() != null) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("details").get("model"), criteriaCar.getDetails().getModel()));
+        if (criteriaCar.getModel() != null) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("model"), criteriaCar.getModel()));
         }
-        if (criteriaCar.getDetails().getBrand() != null) {
-            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("details").get("brand"), criteriaCar.getDetails().getBrand()));
+        if (criteriaCar.getBrand().getName() != null) {
+            predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("brand").get("name"), criteriaCar.getBrand().getName()));
         }
 
         criteriaQuery.where(predicate);

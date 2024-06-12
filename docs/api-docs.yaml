@@ -264,92 +264,6 @@ paths:
             '*/*':
               schema:
                 type: boolean
-  /api/details/{id}:
-    get:
-      tags:
-      - details-controller
-      summary: Get Details
-      description: Get Details By Id
-      operationId: getDetailsById
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      responses:
-        "200":
-          description: Details Get successfully
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-        "404":
-          description: Details with such an Id not found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-    put:
-      tags:
-      - details-controller
-      summary: Update an details
-      description: Update an details by Id and new Details
-      operationId: updateDetails
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DetailsDtoRequest'
-        required: true
-      responses:
-        "400":
-          description: Invalid input
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-        "404":
-          description: Details with such an Id not found or invalid foreign key that
-            is not found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-        "201":
-          description: Details updated successfully
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-    delete:
-      tags:
-      - details-controller
-      summary: Delete an details
-      description: Delete an details by id
-      operationId: deleteDetails
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      responses:
-        "204":
-          description: Details deleted successfully
-          content:
-            '*/*':
-              schema:
-                type: boolean
   /api/cars/{id}:
     get:
       tags:
@@ -432,6 +346,92 @@ paths:
       responses:
         "204":
           description: Car deleted successfully
+          content:
+            '*/*':
+              schema:
+                type: boolean
+  /api/brands/{id}:
+    get:
+      tags:
+      - brand-controller
+      summary: Get Brand
+      description: Get Brand By Id
+      operationId: getBrandById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Brand Get successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+        "404":
+          description: Brand with such an Id not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+    put:
+      tags:
+      - brand-controller
+      summary: Update an brand
+      description: Update a brand by Id and new Brand
+      operationId: updateBrand
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Brand updated successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+        "404":
+          description: Brand with such an Id not found or invalid foreign key that
+            is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+    delete:
+      tags:
+      - brand-controller
+      summary: Delete an brand
+      description: Delete a brand by id
+      operationId: deleteBrand
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: Brand deleted successfully
           content:
             '*/*':
               schema:
@@ -789,63 +789,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ImagesDtoResponse'
-  /api/details:
-    get:
-      tags:
-      - details-controller
-      summary: Get All Details
-      description: Get All Details
-      operationId: getAllDetails
-      parameters:
-      - name: pageable
-        in: query
-        required: true
-        schema:
-          $ref: '#/components/schemas/Pageable'
-      responses:
-        "404":
-          description: No records with Details have been found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PageDetailsDtoResponse'
-        "200":
-          description: Details Get All successfully
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PageDetailsDtoResponse'
-    post:
-      tags:
-      - details-controller
-      summary: Create an details
-      description: Create new details
-      operationId: createDetails
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DetailsDtoRequest'
-        required: true
-      responses:
-        "201":
-          description: Details saved successfully
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-        "400":
-          description: Invalid input
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
-        "404":
-          description: Invalid foreign key that is not found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/DetailsDtoResponse'
   /api/cars:
     get:
       tags:
@@ -948,6 +891,63 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/CarDtoResponse'
+  /api/brands:
+    get:
+      tags:
+      - brand-controller
+      summary: Get All Brand
+      description: Get All Brand
+      operationId: getAllBrand
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Brand Get All successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageBrandDtoResponse'
+        "404":
+          description: No records with Brand have been found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageBrandDtoResponse'
+    post:
+      tags:
+      - brand-controller
+      summary: Create an brand
+      description: Create new brand
+      operationId: createBrand
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandDtoRequest'
+        required: true
+      responses:
+        "201":
+          description: Brand saved successfully
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+        "400":
+          description: Invalid input
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
+        "404":
+          description: Invalid foreign key that is not found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BrandDtoResponse'
   /api/auth/login:
     post:
       tags:
@@ -961,12 +961,6 @@ paths:
               $ref: '#/components/schemas/LoginDtoRequest'
         required: true
       responses:
-        "404":
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
         "401":
           description: Unauthorized
           content:
@@ -975,6 +969,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
         "500":
           description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        "404":
+          description: Not Found
           content:
             '*/*':
               schema:
@@ -1099,6 +1099,126 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/AdminDtoResponse'
+  /api/cars/types:
+    get:
+      tags:
+      - car-controller
+      summary: Get All type
+      description: Get All type
+      operationId: getAllType
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Type Get All successfully
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: No records with Type have been found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/cars/motor-types:
+    get:
+      tags:
+      - car-controller
+      summary: Get All motor type
+      description: Get All Motor type
+      operationId: getAllMotorType
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Motor type Get All successfully
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: No records with Motor type have been found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/cars/models:
+    get:
+      tags:
+      - car-controller
+      summary: Get All models
+      description: Get All Models
+      operationId: getAllModels
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Models Get All successfully
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: No records with Models have been found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+  /api/cars/colors:
+    get:
+      tags:
+      - car-controller
+      summary: Get All color
+      description: Get All color
+      operationId: getAllColor
+      parameters:
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "200":
+          description: Color Get All successfully
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
+        "404":
+          description: No records with Color have been found
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: string
   /api/auth/loginAttempts:
     get:
       tags:
@@ -1195,31 +1315,12 @@ components:
           format: int64
         url:
           type: string
-    DetailsDtoRequest:
-      required:
-      - brand
-      - model
-      type: object
-      properties:
-        brand:
-          type: string
-        model:
-          type: string
-    DetailsDtoResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        brand:
-          type: string
-        model:
-          type: string
     CarDtoRequest:
       required:
+      - brandId
       - color
       - description
-      - detailsId
+      - model
       - motorType
       - name
       - power
@@ -1242,12 +1343,24 @@ components:
           type: string
         type:
           type: string
-        detailsId:
+        model:
+          type: string
+        brandId:
           type: integer
           format: int64
         priceId:
           type: integer
           format: int64
+    BrandDtoResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        logo:
+          type: string
     CarDtoResponse:
       type: object
       properties:
@@ -1268,14 +1381,26 @@ components:
           type: string
         type:
           type: string
-        details:
-          $ref: '#/components/schemas/DetailsDtoResponse'
+        model:
+          type: string
+        brand:
+          $ref: '#/components/schemas/BrandDtoResponse'
         price:
           $ref: '#/components/schemas/PricesDtoResponse'
         images:
           type: array
           items:
             $ref: '#/components/schemas/ImagesDtoResponse'
+    BrandDtoRequest:
+      required:
+      - logo
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        logo:
+          type: string
     AppointmentDtoRequest:
       required:
       - carId
@@ -1524,40 +1649,6 @@ components:
           format: int32
         empty:
           type: boolean
-    PageDetailsDtoResponse:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-          format: int32
-        totalElements:
-          type: integer
-          format: int64
-        pageable:
-          $ref: '#/components/schemas/PageableObject'
-        first:
-          type: boolean
-        last:
-          type: boolean
-        size:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/DetailsDtoResponse'
-        number:
-          type: integer
-          format: int32
-        sort:
-          type: array
-          items:
-            $ref: '#/components/schemas/SortObject'
-        numberOfElements:
-          type: integer
-          format: int32
-        empty:
-          type: boolean
     PageCarDtoResponse:
       type: object
       properties:
@@ -1580,6 +1671,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CarDtoResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortObject'
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageBrandDtoResponse:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrandDtoResponse'
         number:
           type: integer
           format: int32
