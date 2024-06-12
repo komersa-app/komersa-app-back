@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Service
 public class CarService {
@@ -62,5 +65,44 @@ public class CarService {
 
     public Page<Car> findByCriteria(Car criteriaCar, Pageable pageable) {
         return carFilterRepository.findByCriteria(criteriaCar, pageable);
+    }
+
+    public List<String> getAllMotorType(Pageable pageable) {
+        log.info("Motor type get all: {}", pageable);
+        List<String> motorTypeList = new ArrayList<>();
+        for (Car car: carRepository.findAll(pageable)) {
+            String motorType = car.getMotorType();
+            if (!motorTypeList.contains(motorType)) {
+                motorTypeList.add(motorType);
+            }
+        }
+
+        return motorTypeList;
+    }
+
+    public List<String> getAllType(Pageable pageable) {
+        log.info("Type get all: {}", pageable);
+        List<String> typeList = new ArrayList<>();
+        for (Car car: carRepository.findAll(pageable)) {
+            String type = car.getType();
+            if (!typeList.contains(type)) {
+                typeList.add(type);
+            }
+        }
+
+        return typeList;
+    }
+
+    public List<String> getAllColor(Pageable pageable) {
+        log.info("Color get all: {}", pageable);
+        List<String> colorList = new ArrayList<>();
+        for (Car car: carRepository.findAll(pageable)) {
+            String color = car.getColor();
+            if (!colorList.contains(color)) {
+                colorList.add(color);
+            }
+        }
+
+        return colorList;
     }
 }

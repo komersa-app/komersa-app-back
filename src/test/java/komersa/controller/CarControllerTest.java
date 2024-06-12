@@ -6,6 +6,7 @@ import komersa.dto.response.CarDtoResponse;
 import komersa.model.Car;
 import komersa.exception.EntityNotFoundException;
 import komersa.service.CarService;
+import komersa.service.DetailsService;
 import komersa.staticObject.StaticCar;
 import komersa.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,6 +37,8 @@ class CarControllerTest {
 
     @Mock
     private CarService carService;
+    @Mock
+    private DetailsService detailsService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final CarDtoRequest carRequest = StaticCar.carDtoRequest1();
@@ -45,7 +48,7 @@ class CarControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        CarController carController = new CarController(carService);
+        CarController carController = new CarController(carService, detailsService);
         mockMvc = MockMvcBuilders.standaloneSetup(carController)
                 .setControllerAdvice(new GlobalExceptionHandler())
                 .build();
