@@ -8,7 +8,7 @@ import komersa.service.CarService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
-import komersa.service.DetailsService;
+import komersa.service.BrandService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,9 @@ import java.util.List;
 @RequestMapping("/api/cars")
 public class CarController {
     private final CarService carService;
-    private final DetailsService detailsService;
 
-    public CarController(CarService carService, DetailsService detailsService) {
+    public CarController(CarService carService) {
         this.carService = carService;
-        this.detailsService = detailsService;
     }
 
     @PostMapping
@@ -72,19 +70,12 @@ public class CarController {
         return new ResponseEntity<>(carService.getAllColor(pageable), HttpStatus.OK);
     }
 
-    @GetMapping("/brands")
-    @Operation(summary = "Get All brands", description = "Get All Brands")
-    @ApiResponse(responseCode = "200", description = "Brands Get All successfully")
-    @ApiResponse(responseCode = "404", description = "No records with Brands have been found")
-    public ResponseEntity<List<String>> getAllBrands(Pageable pageable) {
-        return new ResponseEntity<>(detailsService.getAllBrands(pageable), HttpStatus.OK);
-    }
     @GetMapping("/models")
     @Operation(summary = "Get All models", description = "Get All Models")
     @ApiResponse(responseCode = "200", description = "Models Get All successfully")
     @ApiResponse(responseCode = "404", description = "No records with Models have been found")
     public ResponseEntity<List<String>> getAllModels(Pageable pageable) {
-        return new ResponseEntity<>(detailsService.getAllBrands(pageable), HttpStatus.OK);
+        return new ResponseEntity<>(carService.getAllModels(pageable), HttpStatus.OK);
     }
 
     @GetMapping

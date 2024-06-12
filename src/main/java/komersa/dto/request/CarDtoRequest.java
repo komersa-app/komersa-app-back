@@ -41,9 +41,13 @@ public class CarDtoRequest {
     @NotBlank(message = "Type cannot be blank")
     private String type;
 
-    @Positive(message = "Details must be a positive number")
-    @NotNull(message = "Details cannot be null")
-    private Long detailsId;
+    @NotNull(message = "Model cannot be null")
+    @NotBlank(message = "Model cannot be blank")
+    private String model;
+
+    @Positive(message = "Brand must be a positive number")
+    @NotNull(message = "Brand cannot be null")
+    private Long brandId;
 
     @Positive(message = "Price must be a positive number")
     @NotNull(message = "Price cannot be null")

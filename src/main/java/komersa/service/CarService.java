@@ -1,6 +1,7 @@
 package komersa.service;
 
 import komersa.exception.EntityNotFoundException;
+import komersa.model.Brand;
 import komersa.model.Car;
 import komersa.repository.CarFilterRepository;
 import komersa.repository.CarRepository;
@@ -16,14 +17,14 @@ import java.util.List;
 @Service
 public class CarService {
     private final CarRepository carRepository;
-    private final DetailsService detailsService;
+    private final BrandService brandService;
     private final PricesService pricesService;
     private final ImagesService imagesService;
     private final CarFilterRepository carFilterRepository;
 
-    public CarService(PricesService pricesService, DetailsService detailsService, CarRepository carRepository, ImagesService imagesService, CarFilterRepository carFilterRepository) {
+    public CarService(PricesService pricesService, BrandService brandService, CarRepository carRepository, ImagesService imagesService, CarFilterRepository carFilterRepository) {
         this.pricesService = pricesService;
-        this.detailsService = detailsService;
+        this.brandService = brandService;
         this.carRepository = carRepository;
         this.imagesService = imagesService;
         this.carFilterRepository = carFilterRepository;
@@ -31,7 +32,7 @@ public class CarService {
 
     public Car create(Car car) {
         log.info("Car create: {}", car);
-        car.setDetails(detailsService.getById(car.getDetails().getId()));
+        car.setBrand(brandService.getById(car.getBrand().getId()));
         car.setPrice(pricesService.getById(car.getPrice().getId()));
         return carRepository.save(car);
     }
@@ -51,7 +52,7 @@ public class CarService {
     public Car updateById(Long id, Car car) {
         getById(id);
         car.setId(id);
-        car.setDetails(detailsService.getById(car.getDetails().getId()));
+        car.setBrand(brandService.getById(car.getBrand().getId()));
         car.setPrice(pricesService.getById(car.getPrice().getId()));
         log.info("Car update by id: {}", car);
         return carRepository.save(car);
@@ -104,5 +105,20 @@ public class CarService {
         }
 
         return colorList;
+    }
+
+    public List<String> getAllModels(Pageable pageable) {
+        log.info("Models get all: {}", pageable);
+        List<String> modelList = new ArrayList<>();
+
+        for (Car car : carRepository.findAll(pageable)) {
+            String model = car.getModel();
+
+            if (!modelList.contains(model)) {
+                modelList.add(model);
+            }
+        }
+
+        return modelList;
     }
 }

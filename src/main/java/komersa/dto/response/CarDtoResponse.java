@@ -27,8 +27,9 @@ public class CarDtoResponse {
     private String status;
 
     private String type;
+    private String model;
 
-    private DetailsDtoResponse details;
+    private BrandDtoResponse brand;
 
     private PricesDtoResponse price;
 

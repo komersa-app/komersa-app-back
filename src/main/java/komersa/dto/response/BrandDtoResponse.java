@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class DetailsDtoResponse {
+public class BrandDtoResponse {
 
     private Long id;
 
-    private String brand;
+    private String name;
 
-    private String model;
+    private String logo;
 }
