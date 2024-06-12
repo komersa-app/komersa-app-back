@@ -894,6 +894,16 @@ paths:
         required: false
         schema:
           type: string
+      - name: model
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: brand
+        in: query
+        required: false
+        schema:
+          type: string
       responses:
         "200":
           description: Car Get All successfully
@@ -957,12 +967,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/LoginDtoResponse'
         "401":
           description: Unauthorized
           content:
@@ -975,6 +979,12 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
   /api/appointments:
     get:
       tags:
@@ -1102,12 +1112,6 @@ paths:
         schema:
           type: string
       responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/LoginDtoResponse'
         "403":
           description: Forbidden
           content:
@@ -1120,6 +1124,12 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
 components:
   schemas:
     VisitorDtoRequest:
