@@ -56,8 +56,10 @@ public class CarController {
           @RequestParam(required = false, value = "motorType") String motorType,
           @RequestParam(required = false, value = "power") String power,
           @RequestParam(required = false, value = "status") String status,
-          @RequestParam(required = false, value = "type") String type
-    ) {
+          @RequestParam(required = false, value = "type") String type,
+          @RequestParam(required = false, value = "model") String model,
+          @RequestParam(required = false, value = "brand") String brand
+) {
         Page<Car> carPage = carService.findByCriteria(new Car(
                 name,
                 description,
@@ -65,7 +67,9 @@ public class CarController {
                 motorType,
                 power,
                 status,
-                type
+                type,
+                brand,
+                model
         ), pageable);
         //Page<Car> carPage = carService.getAll(pageable);
         return new ResponseEntity<>(carPage.map(CarDtoMapper::toResponse), HttpStatus.OK);
