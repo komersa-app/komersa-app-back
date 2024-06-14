@@ -23,6 +23,6 @@ public class PricesDtoRequest {
 
     @JsonFormat(pattern = "YYYY-MM-DD'T'HH-MM-SS'Z'")
     @NotNull(message = "Datetime cannot be null")
-    @NotBlank(message = "Datetime cannot be blank")
+    //@NotBlank(message = "Datetime cannot be blank")
     private LocalDateTime changeDatetime;
 }

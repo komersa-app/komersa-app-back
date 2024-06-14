@@ -961,6 +961,18 @@ paths:
               $ref: '#/components/schemas/LoginDtoRequest'
         required: true
       responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LoginDtoResponse'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
         "401":
           description: Unauthorized
           content:
@@ -973,18 +985,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-        "404":
-          description: Not Found
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/LoginDtoResponse'
   /api/appointments:
     get:
       tags:
@@ -1238,18 +1238,18 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
-        "500":
-          description: Internal Server Error
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
         "200":
           description: OK
           content:
             '*/*':
               schema:
                 $ref: '#/components/schemas/LoginDtoResponse'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
 components:
   schemas:
     VisitorDtoRequest:
@@ -1403,22 +1403,22 @@ components:
           type: string
     AppointmentDtoRequest:
       required:
-      - carId
       - message
-      - name
       - status
-      - visitorId
       type: object
       properties:
         name:
           type: string
+        datetime:
+          type: string
+          format: date-time
         status:
+          type: string
+        message:
           type: string
         carId:
           type: integer
           format: int64
-        message:
-          type: string
         visitorId:
           type: integer
           format: int64
@@ -1480,6 +1480,15 @@ components:
           type: string
           description: password
           example: "123456"
+    LoginDtoResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+        token:
+          type: string
+          description: JWT token
     ApiErrorResponse:
       type: object
       properties:
@@ -1490,15 +1499,6 @@ components:
         description:
           type: string
           description: Error description
-    LoginDtoResponse:
-      type: object
-      properties:
-        name:
-          type: string
-          description: name
-        token:
-          type: string
-          description: JWT token
     Pageable:
       type: object
       properties:

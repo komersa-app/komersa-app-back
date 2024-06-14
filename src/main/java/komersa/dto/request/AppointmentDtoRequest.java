@@ -8,6 +8,7 @@ import komersa.dto.response.VisitorDtoResponse;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
@@ -16,25 +17,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class AppointmentDtoRequest {
-    // TODO: visitor can get admin list without sensitive info
-    // TODO: update api & dto
-    
-    @JsonFormat(pattern = "YYYY-MM-DD'T'HH-MM-SS'Z'")
-    @NotNull(message = "Status cannot be null")
-    @NotBlank(message = "Status cannot be blank")
+    //@NotNull(message = "Name cannot be null")
+    //@NotBlank(message = "Name cannot be blank")
     private String name;
+    
+    //@JsonFormat(pattern = "YYYY-MM-DD'T'HH-MM-SS'Z'")
+    @NotNull(message = "Datetime cannot be null")
+    //@NotBlank(message = "Datetime cannot be blank")
+	//@JsonFormat(pattern = "YYYY-MM-DD'T'HH-MM-SS'Z'")
     private LocalDateTime datetime;
 
     @NotNull(message = "Status cannot be null")
     @NotBlank(message = "Status cannot be blank")
     private String status;
 
-    @Positive(message = "Car must be a positive number")
-    @NotNull(message = "Car cannot be null")
+	@NotBlank(message = "Message cannot be blank")
+    @NotNull(message = "Message cannot be null")
     private String message;
 
-    @NotNull(message = "Status cannot be null")
-    @NotBlank(message = "Status cannot be blank")
+	@Positive(message = "CarId must be a positive number")
+    @NotNull(message = "CarId cannot be null")
     private Long carId;
 
     /*
@@ -45,8 +47,8 @@ public class AppointmentDtoRequest {
      */
 
 
-    @Positive(message = "Visitor must be a positive number")
-    @NotNull(message = "Visitor cannot be null")
+    @Positive(message = "VisitorId must be a positive number")
+    @NotNull(message = "VisitorId cannot be null")
     private Long visitorId;
 
     public AppointmentDtoRequest(String name, LocalDateTime datetime, String status, String message, CarDtoResponse car, VisitorDtoResponse visitor) {
