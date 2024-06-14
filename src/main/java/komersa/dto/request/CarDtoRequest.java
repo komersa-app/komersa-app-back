@@ -3,6 +3,8 @@ package komersa.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import komersa.dto.response.BrandDtoResponse;
+import komersa.dto.response.PricesDtoResponse;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -52,4 +54,17 @@ public class CarDtoRequest {
     @Positive(message = "Price must be a positive number")
     @NotNull(message = "Price cannot be null")
     private Long priceId;
+
+    public CarDtoRequest(String name, String description, String color, String motorType, String power, String status, String type, String model, BrandDtoResponse brand, PricesDtoResponse price) {
+        this.name = name;
+        this.description = description;
+        this.color = color;
+        this.motorType = motorType;
+        this.power = power;
+        this.status = status;
+        this.type = type;
+        this.model = model;
+        this.brandId = brand.getId();
+        this.priceId = price.getId();
+    }
 }

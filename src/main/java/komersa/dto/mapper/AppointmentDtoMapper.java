@@ -13,6 +13,7 @@ public class AppointmentDtoMapper {
 
         model.setName(request.getName());
         model.setStatus(request.getStatus());
+	    model.setDatetime(request.getDatetime());
         model.setMessage(request.getMessage());
         Car car = new Car();
         car.setId(request.getCarId());

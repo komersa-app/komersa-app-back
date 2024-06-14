@@ -9,6 +9,7 @@ public class AdminDtoMapper {
 
     public static Admin toModel(AdminDtoRequest request) {
         Admin model = new Admin();
+
         model.setPassword(request.getPassword());
         model.setName(request.getName());
         model.setEmail(request.getEmail());
