@@ -61,7 +61,7 @@ public class AdminService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Admin admin = adminRepository.findByName(username).orElseThrow(() ->
-                new NotFoundException(String.format("Admin does not exist, email: %s", username)));
+                new NotFoundException(String.format("Admin does not exist, name: %s", username)));
 
         return org.springframework.security.core.userdetails.User.builder()
                 .username(admin.getName())

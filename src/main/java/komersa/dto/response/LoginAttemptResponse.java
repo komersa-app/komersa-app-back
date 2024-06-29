@@ -10,6 +10,6 @@ public record LoginAttemptResponse(
     @Schema(description = "The login status") boolean success) {
 
   public static LoginAttemptResponse convertToDTO(LoginAttempt loginAttempt) {
-    return new LoginAttemptResponse(loginAttempt.createdAt(), loginAttempt.success());
+    return new LoginAttemptResponse(loginAttempt.getCreatedAt(), loginAttempt.isSuccess());
   }
 }

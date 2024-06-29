@@ -11,6 +11,7 @@ import komersa.dto.response.ApiErrorResponse;
 import komersa.dto.response.LoginAttemptResponse;
 import komersa.dto.response.LoginDtoResponse;
 import komersa.helper.JwtHelper;
+import komersa.service.AdminService;
 import komersa.service.LoginService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,16 +20,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @RestController
 public class LoginController {
-    private final AuthenticationManager authenticationManager;
+    //private final AuthenticationManager authenticationManager;
     private final LoginService loginService;
+    private final AdminService adminService;
 
-    public LoginController(AuthenticationManager authenticationManager, LoginService loginService) {
-        this.authenticationManager = authenticationManager;
+    public LoginController(LoginService loginService, AdminService adminService) {
         this.loginService = loginService;
+        this.adminService = adminService;
     }
 
     @Operation(summary = "Authenticate user and return token")
@@ -39,7 +42,10 @@ public class LoginController {
     @PostMapping(value = "/login")
     public ResponseEntity<LoginDtoResponse> login(@Valid @RequestBody LoginDtoRequest loginDtoRequest) {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDtoRequest.name(), loginDtoRequest.password()));
+            //authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDtoRequest.name(), loginDtoRequest.password()));
+            if (!Objects.equals(adminService.loadUserByUsername(loginDtoRequest.name()).getPassword(), loginDtoRequest.password())) {
+                throw new BadCredentialsException("Bad credentials");
+            }
         } catch (BadCredentialsException e) {
             loginService.addLoginAttempt(loginDtoRequest.name(), false);
             throw e;

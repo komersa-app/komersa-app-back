@@ -19,21 +19,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
-  private final AdminService adminService;
-  private final JwtAuthFilter jwtAuthFilter;
+  /*
 
-  public SecurityConfig(AdminService adminService, JwtAuthFilter jwtAuthFilter) {
-    this.adminService = adminService;
-    this.jwtAuthFilter = jwtAuthFilter;
-  }
-
+  === Password Encoder ===
   @Bean
   public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
+   */
 
   @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager) throws Exception {
+  public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
     return http
         .cors(AbstractHttpConfigurer::disable)
         .csrf(AbstractHttpConfigurer::disable)
@@ -41,27 +37,29 @@ public class SecurityConfig {
 //        Set permissions on endpoints
         .authorizeHttpRequests(auth -> auth
 //            our public endpoints
-                .anyRequest().permitAll()
-                /*
             .requestMatchers(HttpMethod.POST, "/api/auth/login/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/authentication-docs/**").permitAll()
 //            our private endpoints
-            .anyRequest().authenticated())*§
-        .authenticationManager(authenticationManager)
+            .anyRequest().authenticated())
+            //.authenticationManager(authenticationManager)
 
 //        We need jwt filter before the UsernamePasswordAuthenticationFilter.
 //        Since we need every request to be authenticated before going through spring security filter.
 //        (UsernamePasswordAuthenticationFilter creates a UsernamePasswordAuthenticationToken from a username and password that are submitted in the HttpServletRequest.)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)*/
-        ).build();
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        .build();
   }
 
+  /*
+
+  === Auth Manager ===
   @Bean
   public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
     AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-    authenticationManagerBuilder.userDetailsService(adminService).passwordEncoder(passwordEncoder());
+    authenticationManagerBuilder.userDetailsService(adminService)/*.passwordEncoder(passwordEncoder());
     return authenticationManagerBuilder.build();
   }
+  */
 }
 
 // CORS(Cross-origin resource sharing) is just to avoid if you run javascript across different domains like if you execute JS on http://testpage.com and access http://anotherpage.com
