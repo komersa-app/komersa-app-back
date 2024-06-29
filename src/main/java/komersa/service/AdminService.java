@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-@Transactional(readOnly = true)
 public class AdminService implements UserDetailsService {
     private final AdminRepository adminRepository;
 

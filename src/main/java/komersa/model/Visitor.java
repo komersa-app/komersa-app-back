@@ -9,12 +9,13 @@ import java.util.List;
 @ToString(callSuper = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorValue("VISITOR")
+@DiscriminatorValue("visitor")
 @Data
-@Entity
+@Entity(name = "visitor")
 public class Visitor extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private Long id;
     @Column(name = "message")
     private String message;
